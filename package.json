@@ -1,7 +1,7 @@
 {
-  "name": "portfolio",
+  "name": "budgeting-app",
   "version": "1.0.0",
-  "homepage": "https://aivaxela.github.io/portfolio/",
+  "homepage": "https://aivaxela.github.io/budgeting-app/",
   "scripts": {
     "start": "parcel ./src/index.html",
     "build": "parcel build ./src/index.html --public-url ./",

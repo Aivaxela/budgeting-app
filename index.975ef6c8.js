@@ -18572,12 +18572,12 @@ var _budgetButton = require("./BudgetButton");
 var _budgetButtonDefault = parcelHelpers.interopDefault(_budgetButton);
 function App() {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "justify-center mx-auto border-black p-8 bg-slate-800 min-h-screen",
+        className: "justify-center border-black p-8 bg-slate-800 min-h-screen",
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-            className: "max-w-3xl mx-auto",
+            className: "max-w-5xl mx-auto",
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                    className: "font-extrabold text-[48px] border-b-2 pb-4 text-center text-slate-300 mb-8",
+                    className: "font-extrabold text-[96px] border-b-2 pb-4 text-center text-slate-300 mb-8",
                     children: "My Budget"
                 }, void 0, false, {
                     fileName: "src/components/App.jsx",
@@ -18831,7 +18831,7 @@ function BudgetButton({ title, remaining, max }) {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
-                className: "text-slate-300 text-center text-[22px]",
+                className: "text-slate-300 text-center text-[30px] mb-2",
                 children: title
             }, void 0, false, {
                 fileName: "src/components/BudgetButton.jsx",
@@ -18850,7 +18850,7 @@ function BudgetButton({ title, remaining, max }) {
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                        className: "text-[30px] text-slate-300 font-normal text-right pr-4",
+                        className: "text-[36px] text-slate-300 font-normal text-right pr-4",
                         children: ` / $${max}`
                     }, void 0, false, {
                         fileName: "src/components/BudgetButton.jsx",

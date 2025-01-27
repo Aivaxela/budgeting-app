@@ -2,9 +2,9 @@ import BudgetButton from "./BudgetButton";
 
 export function App() {
   return (
-    <div className="justify-center mx-auto border-black p-8 bg-slate-800 min-h-screen">
-      <div className="max-w-3xl mx-auto">
-        <h1 className="font-extrabold text-[48px] border-b-2 pb-4 text-center text-slate-300 mb-8">
+    <div className="justify-center border-black p-8 bg-slate-800 min-h-screen">
+      <div className="max-w-5xl mx-auto">
+        <h1 className="font-extrabold text-[96px] border-b-2 pb-4 text-center text-slate-300 mb-8">
           My Budget
         </h1>
         <div className="grid grid-cols-2 gap-8">

@@ -18839,7 +18839,7 @@ function BudgetButton({ title, remaining, max }) {
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "border-[10px] rounded-3xl p-2",
+                className: "border-8 rounded-3xl p-2",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                         className: "text-[75px] text-slate-300 font-extrabold text-left pl-4",

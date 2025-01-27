@@ -2,7 +2,7 @@ export default function BudgetButton({ title, remaining, max }) {
   return (
     <div>
       <h2 className="text-slate-300 text-center text-[22px]">{title}</h2>
-      <div className="border-8px rounded-3xl p-2">
+      <div className="border-8 rounded-3xl p-2">
         <p className="text-[75px] text-slate-300 font-extrabold text-left pl-4">
           {`$${remaining}`}
         </p>

@@ -1,3 +1,4 @@
+import React from "react";
 import BudgetButton from "./BudgetButton";
 
 export function App() {
@@ -20,7 +21,7 @@ export function App() {
           ></BudgetButton>
           <BudgetButton
             title={"Takeout"}
-            remaining={34}
+            remaining={20}
             max={100}
           ></BudgetButton>
         </div>

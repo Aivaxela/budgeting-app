@@ -18896,7 +18896,7 @@ function BudgetButton({ title, remaining, max }) {
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                         style: {
                             width: progressBarValue.toString() + "%",
-                            transition: "width 0.5s, background-color 0.5s"
+                            transition: "width 1.5s, background-color 1.5s"
                         },
                         className: `${progressBarValue > 35 ? "bg-green-400" : "bg-red-400"} h-10 mt-auto rounded-xl`
                     }, void 0, false, {

@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 
-export default function BudgetButton({ title, remaining, max }) {
+export default function BudgetButton({
+  title,
+  remaining,
+  max,
+  id,
+  deleteBudget,
+}) {
   const [progressBarValue, setProgressBarValue] = useState(0);
   const [remainingValue, setRemainingValue] = useState(remaining);
   const [maxValue, setMaxValue] = useState(max);
@@ -32,6 +38,10 @@ export default function BudgetButton({ title, remaining, max }) {
 
   const onBackClick = () => {
     setButtonState("view");
+  };
+
+  const onDeleteClick = () => {
+    deleteBudget(id);
   };
 
   const adjustmentButtonsClass =
@@ -72,6 +82,7 @@ export default function BudgetButton({ title, remaining, max }) {
         <div className="flex flex-col border-8 border-slate-300 rounded-3xl w-full p-2 md:p-4 max-w-[448px]">
           <div className="flex flex-col md:flex-row items-center mb-2 md:mb-8">
             <input
+              autoFocus={true}
               placeholder="0"
               maxLength={10}
               onClick={() => setInputValue("")}
@@ -113,6 +124,14 @@ export default function BudgetButton({ title, remaining, max }) {
                 className={`${adjustmentButtonsClass} text-gray-400 border-gray-400 hover:bg-gray-400 hover:text-slate-800`}
               >
                 back
+              </button>
+            </div>
+            <div className="flex gap-4 justify-between">
+              <button
+                onClick={() => onDeleteClick()}
+                className={`${adjustmentButtonsClass} text-red-400 border-red-400 hover:bg-red-400 hover:text-slate-800`}
+              >
+                delete
               </button>
             </div>
           </div>

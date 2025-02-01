@@ -18761,7 +18761,7 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
         selectedBudget,
         id
     ]);
-    const adjustmentButtonsClass = "text-slate-300 font-semibold text-[20px] sm:text-[24px] md:text-[34px] rounded-xl border-8 p-1 w-full";
+    const adjustmentButtonsClass = "text-slate-300 min-h-32 font-semibold text-[20px] sm:text-[24px] md:text-[34px] rounded-xl border-8 p-1 w-full";
     (0, _react.useEffect)(()=>{
         setProgressBarValue(Math.floor(remainingValue / maxValue * 100));
     }, [
@@ -18827,7 +18827,7 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
                                 maxLength: 10,
                                 value: inputValue || "",
                                 onChange: (e)=>setInputValue(e.target.value),
-                                className: "rounded-xl bg-slate-900 text-5xl sm:text-[50px] w-[95%] md:w-[75%] outline-none border-slate-300 border-4 text-slate-300 font-semibold px-2"
+                                className: "rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl w-[95%] md:w-[75%] outline-none border-slate-300 border-4 text-slate-300 font-semibold px-2"
                             }, void 0, false, {
                                 fileName: "src/components/BudgetButton.jsx",
                                 lineNumber: 97,
@@ -18878,7 +18878,7 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                                 onClick: ()=>onMoreOptionsClick(),
-                                className: "text-slate-300 font-semibold text-xl min-h-10",
+                                className: "text-slate-300 min-h-20 font-semibold text-4xl",
                                 children: "- more options -"
                             }, void 0, false, {
                                 fileName: "src/components/BudgetButton.jsx",
@@ -18924,10 +18924,10 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                 className: `gap-4 justify-between ${moreOptionsVisible ? "flex" : "hidden"}`,
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                    placeholder: "rename budget",
+                                    placeholder: "rename",
                                     maxLength: 20,
                                     onChange: (e)=>setTitleValue(e.target.value),
-                                    className: "mx-auto rounded-xl bg-slate-900 min-h-16 text-xl sm:text-2xl w-[95%] md:w-[75%] outline-none border-slate-300 border-4 text-slate-300 font-semibold px-2"
+                                    className: "mx-auto rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl w-full outline-none border-slate-300 border-4 text-slate-300 font-semibold px-2"
                                 }, void 0, false, {
                                     fileName: "src/components/BudgetButton.jsx",
                                     lineNumber: 156,

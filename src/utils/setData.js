@@ -1,4 +1,4 @@
-  export default getStoredData = () => {
+  export const getStoredData = () => {
     const storedData = localStorage.getItem("data");
 
     if (storedData) {

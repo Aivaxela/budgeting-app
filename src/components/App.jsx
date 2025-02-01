@@ -1,11 +1,10 @@
 import React from "react";
 import BudgetButton from "./BudgetButton";
 import NavBar from "./NavBar";
-import getStoredData from "../utils/setData";
+import { getStoredData } from "../utils/setData";
 
 export function App() {
   const [data, setData] = React.useState(getStoredData());
-  console.log(data);
 
   const addNewBudget = () => {
     const newId =

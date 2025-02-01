@@ -18575,12 +18575,10 @@ var _budgetButtonDefault = parcelHelpers.interopDefault(_budgetButton);
 var _navBar = require("./NavBar");
 var _navBarDefault = parcelHelpers.interopDefault(_navBar);
 var _setData = require("../utils/setData");
-var _setDataDefault = parcelHelpers.interopDefault(_setData);
 var _s = $RefreshSig$();
 function App() {
     _s();
-    const [data, setData] = (0, _reactDefault.default).useState((0, _setDataDefault.default)());
-    console.log(data);
+    const [data, setData] = (0, _reactDefault.default).useState((0, _setData.getStoredData)());
     const addNewBudget = ()=>{
         const newId = data.map((item)=>item.id).reduce((a, b)=>Math.max(a, b)) + 1;
         const newBudget = {
@@ -18611,7 +18609,7 @@ function App() {
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navBarDefault.default), {}, void 0, false, {
                     fileName: "src/components/App.jsx",
-                    lineNumber: 35,
+                    lineNumber: 34,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18626,7 +18624,7 @@ function App() {
                                 deleteBudget: deleteBudget
                             }, item.id, false, {
                                 fileName: "src/components/App.jsx",
-                                lineNumber: 39,
+                                lineNumber: 38,
                                 columnNumber: 15
                             }, this);
                         }),
@@ -18636,24 +18634,24 @@ function App() {
                             children: "+"
                         }, void 0, false, {
                             fileName: "src/components/App.jsx",
-                            lineNumber: 49,
+                            lineNumber: 48,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/App.jsx",
-                    lineNumber: 36,
+                    lineNumber: 35,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/App.jsx",
-            lineNumber: 34,
+            lineNumber: 33,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "src/components/App.jsx",
-        lineNumber: 33,
+        lineNumber: 32,
         columnNumber: 5
     }, this);
 }
@@ -19128,7 +19126,8 @@ $RefreshReg$(_c, "NavBar");
 },{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"aitMS":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-exports.default = getStoredData = ()=>{
+parcelHelpers.export(exports, "getStoredData", ()=>getStoredData);
+const getStoredData = ()=>{
     const storedData = localStorage.getItem("data");
     if (storedData) return JSON.parse(storedData);
     else {

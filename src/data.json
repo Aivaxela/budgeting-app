@@ -1,0 +1,46 @@
+{
+  "Riley": [
+    {
+      "title": "Monthly Budget",
+      "remaining": 1500,
+      "max": 3000
+    },
+    {
+      "title": "Grocery Budget",
+      "remaining": 300,
+      "max": 600
+    },
+    {
+      "title": "Entertainment Budget",
+      "remaining": 100,
+      "max": 200
+    },
+    {
+      "title": "Transport Budget",
+      "remaining": 50,
+      "max": 100
+    }
+  ],
+  "Angel": [
+    {
+      "title": "Weekly Budget",
+      "remaining": 200,
+      "max": 500
+    },
+    {
+      "title": "Grocery Budget",
+      "remaining": 100,
+      "max": 250
+    },
+    {
+      "title": "Entertainment Budget",
+      "remaining": 50,
+      "max": 150
+    },
+    {
+      "title": "Transport Budget",
+      "remaining": 30,
+      "max": 80
+    }
+  ]
+}

@@ -35,21 +35,21 @@ export default function BudgetButton({ title, remaining, max }) {
   };
 
   const adjustmentButtonsClass =
-    "text-slate-300 font-semibold text-[14px] sm:text-[18px] md:text-[28px] rounded-xl border-8 p-1";
+    "text-slate-300 font-semibold text-[16px] sm:text-[18px] md:text-[28px] rounded-xl border-8 p-1 w-full";
 
   useEffect(() => {
     setProgressBarValue(Math.floor((remainingValue / maxValue) * 100));
   }, [remainingValue, maxValue]);
 
   return (
-    <div>
-      <h2 className="text-slate-400 font-semibold italic text-center text-[30px] mb-2">
+    <div className="flex flex-col items-center">
+      <h2 className="text-slate-400 font-semibold italic text-center text-[20px] md:text-[30px] mb-2">
         {title}
       </h2>
       {buttonState === "view" && (
         <button
           onClick={() => onBoxClick()}
-          className=" flex flex-col border-8 border-slate-300 rounded-3xl w-full p-4 hover:bg-slate-300 group"
+          className=" flex flex-col border-8 border-slate-300 rounded-3xl w-full max-w-[448px] p-4 hover:bg-slate-300 group"
         >
           <p className="text-[50px] md:text-[95px] text-slate-300 font-extrabold text-left pl-4 group-hover:text-slate-800">
             {`$${remainingValue}`}
@@ -60,7 +60,7 @@ export default function BudgetButton({ title, remaining, max }) {
           <div
             style={{
               width: progressBarValue.toString() + "%",
-              transition: "width 1.5s, background-color 1.5s",
+              transition: "width 0.5s, background-color 0.5s",
             }}
             className={`${
               progressBarValue > 35 ? "bg-green-400" : "bg-red-400"
@@ -69,15 +69,15 @@ export default function BudgetButton({ title, remaining, max }) {
         </button>
       )}
       {buttonState === "adjust" && (
-        <div className=" flex flex-col border-4 md:border-8 border-slate-300 rounded-3xl w-full p-2 md:p-4">
-          <div className="flex flex-col md:flex-row items-center mb-8">
+        <div className="flex flex-col border-8 border-slate-300 rounded-3xl w-full p-2 md:p-4 max-w-[448px]">
+          <div className="flex flex-col md:flex-row items-center mb-2 md:mb-8">
             <input
               placeholder="0"
               maxLength={10}
               onClick={() => setInputValue("")}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
-              className="rounded-xl bg-slate-900 text-[50px] w-[95%] md:w-[75%] outline-none border-slate-300 border-4 text-slate-300 font-semibold px-2"
+              className="rounded-xl bg-slate-900 text-5xl sm:text-[50px] w-[95%] md:w-[75%] outline-none border-slate-300 border-4 text-slate-300 font-semibold px-2"
             ></input>
             <div className="hidden md:flex flex-col items-end w-[25%]">
               <p className="text-[30px] text-slate-300 font-extrabold">
@@ -88,14 +88,14 @@ export default function BudgetButton({ title, remaining, max }) {
               </p>
             </div>
           </div>
-          <div className="flex gap-2 h-auto justify-between">
+          <div className="flex flex-col gap-2 h-auto justify-between">
             <button
               onClick={() => onSubClick()}
-              className=" w-[70%] font-extrabold text-[16px] sm:text-[24px] md:text-[42px] rounded-xl border-8 p-1 text-red-400 border-red-400 hover:bg-red-400 hover:text-slate-800"
+              className=" w-full font-semibold text-[16px] sm:text-[18px] md:text-[28px] rounded-xl border-8 p-1 text-red-400 border-red-400 hover:bg-red-400 hover:text-slate-800"
             >
               subtract
             </button>
-            <div className="flex flex-col gap-4 justify-between">
+            <div className="flex gap-4 justify-between">
               <button
                 onClick={() => onAddClick()}
                 className={`${adjustmentButtonsClass} text-green-400 border-green-400 hover:bg-green-400 hover:text-slate-800`}
@@ -106,7 +106,7 @@ export default function BudgetButton({ title, remaining, max }) {
                 onClick={() => onMaxClick()}
                 className={`${adjustmentButtonsClass} text-purple-400 border-purple-400 hover:bg-purple-400 hover:text-slate-800`}
               >
-                set max
+                max
               </button>
               <button
                 onClick={() => onBackClick()}

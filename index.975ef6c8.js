@@ -18572,68 +18572,92 @@ var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _budgetButton = require("./BudgetButton");
 var _budgetButtonDefault = parcelHelpers.interopDefault(_budgetButton);
+var _navBar = require("./NavBar");
+var _navBarDefault = parcelHelpers.interopDefault(_navBar);
+var _setData = require("../utils/setData");
+var _setDataDefault = parcelHelpers.interopDefault(_setData);
+var _s = $RefreshSig$();
 function App() {
+    _s();
+    const [data, setData] = (0, _reactDefault.default).useState((0, _setDataDefault.default)());
+    console.log(data);
+    const addNewBudget = ()=>{
+        const newId = data.map((item)=>item.id).reduce((a, b)=>Math.max(a, b)) + 1;
+        const newBudget = {
+            title: "New Budget",
+            remaining: 100,
+            max: 100,
+            id: newId
+        };
+        setData([
+            ...data,
+            newBudget
+        ]);
+        localStorage.setItem("data", JSON.stringify([
+            ...data,
+            newBudget
+        ]));
+    };
+    const deleteBudget = (id)=>{
+        if (data.length === 1) return;
+        const newData = data.filter((item)=>item.id !== id);
+        setData(newData);
+        localStorage.setItem("data", JSON.stringify(newData));
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "justify-center border-black p-8 bg-slate-800 min-h-screen",
+        className: "justify-center border-black p-8 bg-slate-800 min-h-screen min-w-[320px]",
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             className: "max-w-5xl mx-auto",
             children: [
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                    className: "font-extrabold text-[60px] md:text-[96px] border-b-2 pb-4 text-center text-slate-300 mb-8",
-                    children: "No BS Budget"
-                }, void 0, false, {
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navBarDefault.default), {}, void 0, false, {
                     fileName: "src/components/App.jsx",
-                    lineNumber: 8,
+                    lineNumber: 35,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                    className: "grid grid-cols-2 gap-8",
+                    className: "grid grid-cols-1 sm:grid-cols-2 gap-8 mt-28",
                     children: [
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _budgetButtonDefault.default), {
-                            title: "General Spending",
-                            remaining: 174,
-                            max: 250
+                        Array.from(data).map((item)=>{
+                            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _budgetButtonDefault.default), {
+                                title: item.title,
+                                remaining: item.remaining,
+                                max: item.max,
+                                id: item.id,
+                                deleteBudget: deleteBudget
+                            }, item.id, false, {
+                                fileName: "src/components/App.jsx",
+                                lineNumber: 39,
+                                columnNumber: 15
+                            }, this);
+                        }),
+                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                            onClick: ()=>addNewBudget(),
+                            className: "text-slate-300 font-extrabold text-[72px]",
+                            children: "+"
                         }, void 0, false, {
                             fileName: "src/components/App.jsx",
-                            lineNumber: 12,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _budgetButtonDefault.default), {
-                            title: "Groceries",
-                            remaining: 112,
-                            max: 300
-                        }, void 0, false, {
-                            fileName: "src/components/App.jsx",
-                            lineNumber: 17,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _budgetButtonDefault.default), {
-                            title: "Takeout",
-                            remaining: 20,
-                            max: 100
-                        }, void 0, false, {
-                            fileName: "src/components/App.jsx",
-                            lineNumber: 22,
+                            lineNumber: 49,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/App.jsx",
-                    lineNumber: 11,
+                    lineNumber: 36,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/App.jsx",
-            lineNumber: 7,
+            lineNumber: 34,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "src/components/App.jsx",
-        lineNumber: 6,
+        lineNumber: 33,
         columnNumber: 5
     }, this);
 }
+_s(App, "ndm+5WNMV0IQte1uPiNELJoCgJc=");
 _c = App;
 var _c;
 $RefreshReg$(_c, "App");
@@ -18643,7 +18667,246 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./BudgetButton":"fjHCn","react":"21dqq"}],"gkKU3":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./BudgetButton":"fjHCn","./NavBar":"eqUVf","../utils/setData":"aitMS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fjHCn":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$16bd = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$16bd.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>BudgetButton);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _s = $RefreshSig$();
+function BudgetButton({ title, remaining, max, id, deleteBudget }) {
+    _s();
+    const [progressBarValue, setProgressBarValue] = (0, _react.useState)(0);
+    const [remainingValue, setRemainingValue] = (0, _react.useState)(remaining);
+    const [maxValue, setMaxValue] = (0, _react.useState)(max);
+    const [buttonState, setButtonState] = (0, _react.useState)("view");
+    const [inputValue, setInputValue] = (0, _react.useState)(0);
+    const onBoxClick = ()=>{
+        setButtonState("adjust");
+    };
+    const onAddClick = ()=>{
+        setRemainingValue((prev)=>Math.min(prev + parseInt(inputValue), maxValue));
+        setButtonState("view");
+    };
+    const onSubClick = ()=>{
+        setRemainingValue((prev)=>Math.max(prev - parseInt(inputValue), 0));
+        setButtonState("view");
+    };
+    const onMaxClick = ()=>{
+        setMaxValue(parseInt(inputValue));
+        if (remainingValue > parseInt(inputValue)) setRemainingValue(parseInt(inputValue));
+    };
+    const onBackClick = ()=>{
+        setButtonState("view");
+    };
+    const onDeleteClick = ()=>{
+        deleteBudget(id);
+    };
+    const adjustmentButtonsClass = "text-slate-300 font-semibold text-[16px] sm:text-[18px] md:text-[28px] rounded-xl border-8 p-1 w-full";
+    (0, _react.useEffect)(()=>{
+        setProgressBarValue(Math.floor(remainingValue / maxValue * 100));
+    }, [
+        remainingValue,
+        maxValue
+    ]);
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "flex flex-col items-center",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                className: "text-slate-400 font-semibold italic text-center text-[20px] md:text-[30px] mb-2",
+                children: title
+            }, void 0, false, {
+                fileName: "src/components/BudgetButton.jsx",
+                lineNumber: 56,
+                columnNumber: 7
+            }, this),
+            buttonState === "view" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                onClick: ()=>onBoxClick(),
+                className: " flex flex-col border-8 border-slate-300 rounded-3xl w-full max-w-[448px] p-4 hover:bg-slate-300 group",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                        className: "text-[50px] md:text-[95px] text-slate-300 font-extrabold text-left pl-4 group-hover:text-slate-800",
+                        children: `$${remainingValue}`
+                    }, void 0, false, {
+                        fileName: "src/components/BudgetButton.jsx",
+                        lineNumber: 64,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                        className: "text-[28px] md:text-[46px] text-slate-400 font-normal text-right pr-4 pb-2 group-hover:text-slate-800 self-end",
+                        children: ` / $${maxValue}`
+                    }, void 0, false, {
+                        fileName: "src/components/BudgetButton.jsx",
+                        lineNumber: 67,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        style: {
+                            width: progressBarValue.toString() + "%",
+                            transition: "width 0.5s, background-color 0.5s"
+                        },
+                        className: `${progressBarValue > 35 ? "bg-green-400" : "bg-red-400"} h-10 mt-auto rounded-xl`
+                    }, void 0, false, {
+                        fileName: "src/components/BudgetButton.jsx",
+                        lineNumber: 70,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/BudgetButton.jsx",
+                lineNumber: 60,
+                columnNumber: 9
+            }, this),
+            buttonState === "adjust" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "flex flex-col border-8 border-slate-300 rounded-3xl w-full p-2 md:p-4 max-w-[448px]",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex flex-col md:flex-row items-center mb-2 md:mb-8",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                autoFocus: true,
+                                placeholder: "0",
+                                maxLength: 10,
+                                onClick: ()=>setInputValue(""),
+                                value: inputValue,
+                                onChange: (e)=>setInputValue(e.target.value),
+                                className: "rounded-xl bg-slate-900 text-5xl sm:text-[50px] w-[95%] md:w-[75%] outline-none border-slate-300 border-4 text-slate-300 font-semibold px-2"
+                            }, void 0, false, {
+                                fileName: "src/components/BudgetButton.jsx",
+                                lineNumber: 84,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "hidden md:flex flex-col items-end w-[25%]",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                        className: "text-[30px] text-slate-300 font-extrabold",
+                                        children: `$${remainingValue}`
+                                    }, void 0, false, {
+                                        fileName: "src/components/BudgetButton.jsx",
+                                        lineNumber: 94,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                        className: "text-[24px] text-slate-300 font-normal",
+                                        children: ` / $${maxValue}`
+                                    }, void 0, false, {
+                                        fileName: "src/components/BudgetButton.jsx",
+                                        lineNumber: 97,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/BudgetButton.jsx",
+                                lineNumber: 93,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/BudgetButton.jsx",
+                        lineNumber: 83,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex flex-col gap-2 h-auto justify-between",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                onClick: ()=>onSubClick(),
+                                className: " w-full font-semibold text-[16px] sm:text-[18px] md:text-[28px] rounded-xl border-8 p-1 text-red-400 border-red-400 hover:bg-red-400 hover:text-slate-800",
+                                children: "subtract"
+                            }, void 0, false, {
+                                fileName: "src/components/BudgetButton.jsx",
+                                lineNumber: 103,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "flex gap-4 justify-between",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                        onClick: ()=>onAddClick(),
+                                        className: `${adjustmentButtonsClass} text-green-400 border-green-400 hover:bg-green-400 hover:text-slate-800`,
+                                        children: "add"
+                                    }, void 0, false, {
+                                        fileName: "src/components/BudgetButton.jsx",
+                                        lineNumber: 110,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                        onClick: ()=>onMaxClick(),
+                                        className: `${adjustmentButtonsClass} text-purple-400 border-purple-400 hover:bg-purple-400 hover:text-slate-800`,
+                                        children: "max"
+                                    }, void 0, false, {
+                                        fileName: "src/components/BudgetButton.jsx",
+                                        lineNumber: 116,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                        onClick: ()=>onBackClick(),
+                                        className: `${adjustmentButtonsClass} text-gray-400 border-gray-400 hover:bg-gray-400 hover:text-slate-800`,
+                                        children: "back"
+                                    }, void 0, false, {
+                                        fileName: "src/components/BudgetButton.jsx",
+                                        lineNumber: 122,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/BudgetButton.jsx",
+                                lineNumber: 109,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "flex gap-4 justify-between",
+                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                    onClick: ()=>onDeleteClick(),
+                                    className: `${adjustmentButtonsClass} text-red-400 border-red-400 hover:bg-red-400 hover:text-slate-800`,
+                                    children: "delete"
+                                }, void 0, false, {
+                                    fileName: "src/components/BudgetButton.jsx",
+                                    lineNumber: 130,
+                                    columnNumber: 15
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "src/components/BudgetButton.jsx",
+                                lineNumber: 129,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/BudgetButton.jsx",
+                        lineNumber: 102,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/BudgetButton.jsx",
+                lineNumber: 82,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/BudgetButton.jsx",
+        lineNumber: 55,
+        columnNumber: 5
+    }, this);
+}
+_s(BudgetButton, "/vnMfAwqXfRELLM9HJjwVy85tpI=");
+_c = BudgetButton;
+var _c;
+$RefreshReg$(_c, "BudgetButton");
+
+  $parcel$ReactRefreshHelpers$16bd.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"gkKU3":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -18818,224 +19081,70 @@ function registerExportsForReactRefresh(module1) {
 },{"7422ead32dcc1e6b":"786KC","630b62916b1ae0e7":"4SQxb"}],"4SQxb":[function(require,module,exports,__globalThis) {
 module.exports = JSON.parse("{\"name\":\"react-refresh\",\"description\":\"React is a JavaScript library for building user interfaces.\",\"keywords\":[\"react\"],\"version\":\"0.14.2\",\"homepage\":\"https://reactjs.org/\",\"bugs\":\"https://github.com/facebook/react/issues\",\"license\":\"MIT\",\"files\":[\"LICENSE\",\"README.md\",\"babel.js\",\"runtime.js\",\"cjs/\",\"umd/\"],\"main\":\"runtime.js\",\"exports\":{\".\":\"./runtime.js\",\"./runtime\":\"./runtime.js\",\"./babel\":\"./babel.js\",\"./package.json\":\"./package.json\"},\"repository\":{\"type\":\"git\",\"url\":\"https://github.com/facebook/react.git\",\"directory\":\"packages/react\"},\"engines\":{\"node\":\">=0.10.0\"},\"devDependencies\":{\"react-16-8\":\"npm:react@16.8.0\",\"react-dom-16-8\":\"npm:react-dom@16.8.0\",\"scheduler-0-13\":\"npm:scheduler@0.13.0\"}}");
 
-},{}],"fjHCn":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$16bd = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{}],"eqUVf":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$979d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$16bd.prelude(module);
+$parcel$ReactRefreshHelpers$979d.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>BudgetButton);
+parcelHelpers.export(exports, "default", ()=>NavBar);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
-var _s = $RefreshSig$();
-function BudgetButton({ title, remaining, max }) {
-    _s();
-    const [progressBarValue, setProgressBarValue] = (0, _react.useState)(0);
-    const [remainingValue, setRemainingValue] = (0, _react.useState)(remaining);
-    const [maxValue, setMaxValue] = (0, _react.useState)(max);
-    const [buttonState, setButtonState] = (0, _react.useState)("view");
-    const [inputValue, setInputValue] = (0, _react.useState)(0);
-    const onBoxClick = ()=>{
-        setButtonState("adjust");
-    };
-    const onAddClick = ()=>{
-        setRemainingValue((prev)=>Math.min(prev + parseInt(inputValue), maxValue));
-        setButtonState("view");
-    };
-    const onSubClick = ()=>{
-        setRemainingValue((prev)=>Math.max(prev - parseInt(inputValue), 0));
-        setButtonState("view");
-    };
-    const onMaxClick = ()=>{
-        setMaxValue(parseInt(inputValue));
-        if (remainingValue > parseInt(inputValue)) setRemainingValue(parseInt(inputValue));
-    };
-    const onBackClick = ()=>{
-        setButtonState("view");
-    };
-    const adjustmentButtonsClass = "text-slate-300 font-semibold text-[14px] sm:text-[18px] md:text-[28px] rounded-xl border-8 p-1";
-    (0, _react.useEffect)(()=>{
-        setProgressBarValue(Math.floor(remainingValue / maxValue * 100));
-    }, [
-        remainingValue,
-        maxValue
-    ]);
+function NavBar() {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
-                className: "text-slate-400 font-semibold italic text-center text-[30px] mb-2",
-                children: title
+        className: "fixed top-0 left-0 w-full p-4 backdrop-blur-xl backdrop-brightness-90",
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+            className: "flex justify-center max-w-5xl mx-auto",
+            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                className: "font-extrabold text-4xl md:text-6xl text-center text-slate-300 opacity-75",
+                children: "NBS Budget"
             }, void 0, false, {
-                fileName: "src/components/BudgetButton.jsx",
-                lineNumber: 46,
-                columnNumber: 7
-            }, this),
-            buttonState === "view" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                onClick: ()=>onBoxClick(),
-                className: " flex flex-col border-8 border-slate-300 rounded-3xl w-full p-4 hover:bg-slate-300 group",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                        className: "text-[50px] md:text-[95px] text-slate-300 font-extrabold text-left pl-4 group-hover:text-slate-800",
-                        children: `$${remainingValue}`
-                    }, void 0, false, {
-                        fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 54,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                        className: "text-[28px] md:text-[46px] text-slate-400 font-normal text-right pr-4 pb-2 group-hover:text-slate-800 self-end",
-                        children: ` / $${maxValue}`
-                    }, void 0, false, {
-                        fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 57,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        style: {
-                            width: progressBarValue.toString() + "%",
-                            transition: "width 1.5s, background-color 1.5s"
-                        },
-                        className: `${progressBarValue > 35 ? "bg-green-400" : "bg-red-400"} h-10 mt-auto rounded-xl`
-                    }, void 0, false, {
-                        fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 60,
-                        columnNumber: 11
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/BudgetButton.jsx",
-                lineNumber: 50,
-                columnNumber: 9
-            }, this),
-            buttonState === "adjust" && /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: " flex flex-col border-4 md:border-8 border-slate-300 rounded-3xl w-full p-2 md:p-4",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "flex flex-col md:flex-row items-center mb-8",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                placeholder: "0",
-                                maxLength: 10,
-                                onClick: ()=>setInputValue(""),
-                                value: inputValue,
-                                onChange: (e)=>setInputValue(e.target.value),
-                                className: "rounded-xl bg-slate-900 text-[50px] w-[95%] md:w-[75%] outline-none border-slate-300 border-4 text-slate-300 font-semibold px-2"
-                            }, void 0, false, {
-                                fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 74,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "hidden md:flex flex-col items-end w-[25%]",
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                        className: "text-[30px] text-slate-300 font-extrabold",
-                                        children: `$${remainingValue}`
-                                    }, void 0, false, {
-                                        fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 83,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                        className: "text-[24px] text-slate-300 font-normal",
-                                        children: ` / $${maxValue}`
-                                    }, void 0, false, {
-                                        fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 86,
-                                        columnNumber: 15
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 82,
-                                columnNumber: 13
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 73,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "flex gap-2 h-auto justify-between",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                onClick: ()=>onSubClick(),
-                                className: " w-[70%] font-extrabold text-[16px] sm:text-[24px] md:text-[42px] rounded-xl border-8 p-1 text-red-400 border-red-400 hover:bg-red-400 hover:text-slate-800",
-                                children: "subtract"
-                            }, void 0, false, {
-                                fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 92,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "flex flex-col gap-4 justify-between",
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                        onClick: ()=>onAddClick(),
-                                        className: `${adjustmentButtonsClass} text-green-400 border-green-400 hover:bg-green-400 hover:text-slate-800`,
-                                        children: "add"
-                                    }, void 0, false, {
-                                        fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 99,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                        onClick: ()=>onMaxClick(),
-                                        className: `${adjustmentButtonsClass} text-purple-400 border-purple-400 hover:bg-purple-400 hover:text-slate-800`,
-                                        children: "set max"
-                                    }, void 0, false, {
-                                        fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 105,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                        onClick: ()=>onBackClick(),
-                                        className: `${adjustmentButtonsClass} text-gray-400 border-gray-400 hover:bg-gray-400 hover:text-slate-800`,
-                                        children: "back"
-                                    }, void 0, false, {
-                                        fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 111,
-                                        columnNumber: 15
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 98,
-                                columnNumber: 13
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 91,
-                        columnNumber: 11
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/BudgetButton.jsx",
-                lineNumber: 72,
+                fileName: "src/components/NavBar.jsx",
+                lineNumber: 5,
                 columnNumber: 9
             }, this)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/BudgetButton.jsx",
-        lineNumber: 45,
+        }, void 0, false, {
+            fileName: "src/components/NavBar.jsx",
+            lineNumber: 4,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "src/components/NavBar.jsx",
+        lineNumber: 3,
         columnNumber: 5
     }, this);
 }
-_s(BudgetButton, "/vnMfAwqXfRELLM9HJjwVy85tpI=");
-_c = BudgetButton;
+_c = NavBar;
 var _c;
-$RefreshReg$(_c, "BudgetButton");
+$RefreshReg$(_c, "NavBar");
 
-  $parcel$ReactRefreshHelpers$16bd.postlude(module);
+  $parcel$ReactRefreshHelpers$979d.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"irmnC":[function() {},{}]},["aQL8O","9mu7C","8lqZg"], "8lqZg", "parcelRequire94c2")
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"aitMS":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+exports.default = getStoredData = ()=>{
+    const storedData = localStorage.getItem("data");
+    if (storedData) return JSON.parse(storedData);
+    else {
+        const data = [
+            {
+                title: "Personal Spending",
+                remaining: 100,
+                max: 100,
+                id: 0
+            }
+        ];
+        localStorage.setItem("data", JSON.stringify(data));
+        return data;
+    }
+};
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"irmnC":[function() {},{}]},["aQL8O","9mu7C","8lqZg"], "8lqZg", "parcelRequire94c2")
 
 //# sourceMappingURL=index.975ef6c8.js.map

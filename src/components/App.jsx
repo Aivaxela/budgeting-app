@@ -6,14 +6,22 @@ import DataHandler from "../utils/dataHandler";
 const dataHandler = new DataHandler();
 
 export function App() {
-  const [data, setData] = useState([]);
+  const [budgets, setBudgets] = useState([]);
   const [selectedBudget, setSelectedBudget] = useState(0);
 
-  const addNewBudget = () => {
-    console.log("new budget method");
+  useEffect(() => {
+    const storedData = dataHandler.getStoredData();
+    if (storedData) setBudgets([...storedData]);
 
+    document.addEventListener("click", handleBgClick);
+    return () => document.removeEventListener("click", handleBgClick);
+  }, []);
+
+  const addNewBudget = () => {
     const newId =
-      data.map((item) => item.id).reduce((a, b) => Math.max(a, b)) + 1;
+      budgets
+        .map((item) => item.id)
+        .reduce((acc, curr) => Math.max(acc, curr)) + 1;
 
     const newBudget = {
       title: "New Budget",
@@ -21,72 +29,60 @@ export function App() {
       max: 100,
       id: newId,
     };
-    setData([...data, newBudget]);
-    dataHandler.setStoredData([...data, newBudget]);
+    console.log(...budgets);
+    setBudgets([...budgets, newBudget]);
+    dataHandler.setStoredData([...budgets, newBudget]);
     setSelectedBudget(0);
   };
 
-  const deleteBudget = (id) => {
-    console.log("delete budget method");
-
-    if (data.length === 1) return;
-
-    const newData = data.filter((item) => item.id !== id);
-    setData([...newData]);
-    dataHandler.setStoredData(newData);
-  };
-
-  const subtractFromBudget = (id, remainder) => {
-    const updatedData = data.map((budget) => {
-      if (budget.id === id) {
-        return { ...budget, remaining: remainder };
-      }
+  const updateBudget = ({ id, newRemaining, newMax, newTitle }) => {
+    const updatedData = budgets.map((budget) => {
+      if (budget.id === id)
+        return {
+          ...budget,
+          remaining:
+            newRemaining || newRemaining === 0
+              ? newRemaining
+              : budget.remaining,
+          max: newMax || budget.max,
+          title: newTitle || budget.title,
+        };
       return budget;
     });
     dataHandler.setStoredData(updatedData);
     setSelectedBudget(0);
-    setData([...updatedData]);
+    setBudgets([...updatedData]);
   };
 
-  const selectBudget = (id) => {
-    setSelectedBudget(id);
+  const deleteBudget = (id) => {
+    if (budgets.length === 1) return;
+
+    const newData = budgets.filter((item) => item.id !== id);
+    setBudgets([...newData]);
+    dataHandler.setStoredData(newData);
   };
 
-  const handleBgClick = (e) => {
-    if (e.target.classList.contains("bgRef")) {
-      setSelectedBudget(0);
-    }
-  };
-
-  useEffect(() => {
-    const storedData = dataHandler.getStoredData();
-    if (storedData) setData([...storedData]);
-  }, [dataHandler]);
-
-  useEffect(() => {
-    document.addEventListener("click", handleBgClick);
-    return () => {
-      document.removeEventListener("click", handleBgClick);
-    };
-  }, []);
+  const selectBudget = (id) => setSelectedBudget(id);
+  const handleBgClick = (e) =>
+    e.target.classList.contains("bgRef") && setSelectedBudget(0);
 
   return (
     <div className="bgRef justify-center border-black p-8 bg-slate-800 min-h-screen min-w-[320px]">
       <div className="max-w-5xl mx-auto">
         <NavBar />
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-28">
-          {Array.from(data).map((item) => {
+          {budgets.map((budget) => {
             return (
               <BudgetButton
-                key={item.id}
-                title={item.title}
-                remaining={item.remaining}
-                max={item.max}
-                id={item.id}
+                key={budget.id}
+                title={budget.title}
+                remaining={budget.remaining}
+                max={budget.max}
+                id={budget.id}
                 deleteBudget={deleteBudget}
                 selectBudget={selectBudget}
                 selectedBudget={selectedBudget}
-                subtractFromBudget={subtractFromBudget}
+                updateBudget={updateBudget}
               />
             );
           })}

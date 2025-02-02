@@ -2,7 +2,7 @@
 
     getStoredData = () => {
         const storedData = localStorage.getItem("data");
-        if (!storedData) this.createNewStoredData();
+        if (!storedData) return this.createNewStoredData();
         return JSON.parse(storedData);
     }
 
@@ -18,5 +18,6 @@
             id: 1
           }];
           this.setStoredData(newData);
+          return newData;
     }
   }

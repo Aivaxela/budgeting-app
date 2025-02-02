@@ -330,14 +330,6 @@ img, video {
   height: auto;
 }
 
-.min-h-10 {
-  min-height: 2.5rem;
-}
-
-.min-h-16 {
-  min-height: 4rem;
-}
-
 .min-h-20 {
   min-height: 5rem;
 }
@@ -360,10 +352,6 @@ img, video {
 
 .w-full {
   width: 100%;
-}
-
-.w-\[75\%\] {
-  width: 75%;
 }
 
 .min-w-\[320px\] {
@@ -420,6 +408,10 @@ img, video {
 
 .self-end {
   align-self: flex-end;
+}
+
+.self-center {
+  align-self: center;
 }
 
 .rounded-3xl {
@@ -528,6 +520,10 @@ img, video {
   text-align: right;
 }
 
+.align-middle {
+  vertical-align: middle;
+}
+
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
@@ -536,16 +532,6 @@ img, video {
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
-}
-
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
-}
-
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
 }
 
 .text-\[20px\] {
@@ -570,16 +556,6 @@ img, video {
 
 .text-\[72px\] {
   font-size: 72px;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
 }
 
 .font-bold {
@@ -656,10 +632,6 @@ img, video {
   transition-timing-function: cubic-bezier(.4, 0, .2, 1);
 }
 
-.marker\:w-full ::marker, .marker\:w-full::marker {
-  width: 100%;
-}
-
 .hover\:bg-green-400:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(74 222 128 / var(--tw-bg-opacity, 1));
@@ -690,22 +662,9 @@ img, video {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .sm\:text-2xl {
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
-
   .sm\:text-5xl {
     font-size: 3rem;
     line-height: 1;
-  }
-
-  .sm\:text-\[24px\] {
-    font-size: 24px;
-  }
-
-  .sm\:text-\[50px\] {
-    font-size: 50px;
   }
 
   .sm\:text-6xl {
@@ -713,9 +672,8 @@ img, video {
     line-height: 1;
   }
 
-  .sm\:text-4xl {
-    font-size: 2.25rem;
-    line-height: 2.5rem;
+  .sm\:text-\[24px\] {
+    font-size: 24px;
   }
 }
 
@@ -726,10 +684,6 @@ img, video {
 
   .md\:w-\[75\%\] {
     width: 75%;
-  }
-
-  .md\:w-full {
-    width: 100%;
   }
 
   .md\:flex-row {

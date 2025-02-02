@@ -18580,70 +18580,61 @@ var _s = $RefreshSig$();
 const dataHandler = new (0, _dataHandlerDefault.default)();
 function App() {
     _s();
-    const [data, setData] = (0, _react.useState)([]);
+    const [budgets, setBudgets] = (0, _react.useState)([]);
     const [selectedBudget, setSelectedBudget] = (0, _react.useState)(0);
+    (0, _react.useEffect)(()=>{
+        const storedData = dataHandler.getStoredData();
+        if (storedData) setBudgets([
+            ...storedData
+        ]);
+        document.addEventListener("click", handleBgClick);
+        return ()=>document.removeEventListener("click", handleBgClick);
+    }, []);
     const addNewBudget = ()=>{
-        console.log("new budget method");
-        const newId = data.map((item)=>item.id).reduce((a, b)=>Math.max(a, b)) + 1;
+        const newId = budgets.map((item)=>item.id).reduce((acc, curr)=>Math.max(acc, curr)) + 1;
         const newBudget = {
             title: "New Budget",
             remaining: 100,
             max: 100,
             id: newId
         };
-        setData([
-            ...data,
+        console.log(...budgets);
+        setBudgets([
+            ...budgets,
             newBudget
         ]);
         dataHandler.setStoredData([
-            ...data,
+            ...budgets,
             newBudget
         ]);
         setSelectedBudget(0);
     };
-    const deleteBudget = (id)=>{
-        console.log("delete budget method");
-        if (data.length === 1) return;
-        const newData = data.filter((item)=>item.id !== id);
-        setData([
-            ...newData
-        ]);
-        dataHandler.setStoredData(newData);
-    };
-    const subtractFromBudget = (id, remainder)=>{
-        const updatedData = data.map((budget)=>{
+    const updateBudget = ({ id, newRemaining, newMax, newTitle })=>{
+        const updatedData = budgets.map((budget)=>{
             if (budget.id === id) return {
                 ...budget,
-                remaining: remainder
+                remaining: newRemaining || newRemaining === 0 ? newRemaining : budget.remaining,
+                max: newMax || budget.max,
+                title: newTitle || budget.title
             };
             return budget;
         });
         dataHandler.setStoredData(updatedData);
         setSelectedBudget(0);
-        setData([
+        setBudgets([
             ...updatedData
         ]);
     };
-    const selectBudget = (id)=>{
-        setSelectedBudget(id);
-    };
-    const handleBgClick = (e)=>{
-        if (e.target.classList.contains("bgRef")) setSelectedBudget(0);
-    };
-    (0, _react.useEffect)(()=>{
-        const storedData = dataHandler.getStoredData();
-        if (storedData) setData([
-            ...storedData
+    const deleteBudget = (id)=>{
+        if (budgets.length === 1) return;
+        const newData = budgets.filter((item)=>item.id !== id);
+        setBudgets([
+            ...newData
         ]);
-    }, [
-        dataHandler
-    ]);
-    (0, _react.useEffect)(()=>{
-        document.addEventListener("click", handleBgClick);
-        return ()=>{
-            document.removeEventListener("click", handleBgClick);
-        };
-    }, []);
+        dataHandler.setStoredData(newData);
+    };
+    const selectBudget = (id)=>setSelectedBudget(id);
+    const handleBgClick = (e)=>e.target.classList.contains("bgRef") && setSelectedBudget(0);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "bgRef justify-center border-black p-8 bg-slate-800 min-h-screen min-w-[320px]",
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18651,25 +18642,25 @@ function App() {
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navBarDefault.default), {}, void 0, false, {
                     fileName: "src/components/App.jsx",
-                    lineNumber: 76,
+                    lineNumber: 72,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                     className: "grid grid-cols-1 sm:grid-cols-2 gap-8 mt-28",
                     children: [
-                        Array.from(data).map((item)=>{
+                        budgets.map((budget)=>{
                             return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _budgetButtonDefault.default), {
-                                title: item.title,
-                                remaining: item.remaining,
-                                max: item.max,
-                                id: item.id,
+                                title: budget.title,
+                                remaining: budget.remaining,
+                                max: budget.max,
+                                id: budget.id,
                                 deleteBudget: deleteBudget,
                                 selectBudget: selectBudget,
                                 selectedBudget: selectedBudget,
-                                subtractFromBudget: subtractFromBudget
-                            }, item.id, false, {
+                                updateBudget: updateBudget
+                            }, budget.id, false, {
                                 fileName: "src/components/App.jsx",
-                                lineNumber: 80,
+                                lineNumber: 76,
                                 columnNumber: 15
                             }, this);
                         }),
@@ -18679,28 +18670,28 @@ function App() {
                             children: "+"
                         }, void 0, false, {
                             fileName: "src/components/App.jsx",
-                            lineNumber: 93,
+                            lineNumber: 89,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/App.jsx",
-                    lineNumber: 77,
+                    lineNumber: 73,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/App.jsx",
-            lineNumber: 75,
+            lineNumber: 71,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "src/components/App.jsx",
-        lineNumber: 74,
+        lineNumber: 70,
         columnNumber: 5
     }, this);
 }
-_s(App, "6pswkOQgGBdH1QQDwDN9+vIHoac=");
+_s(App, "tr2k1dhEBOOPhOUUXIFF3LFMVuA=");
 _c = App;
 var _c;
 $RefreshReg$(_c, "App");
@@ -18723,60 +18714,59 @@ parcelHelpers.export(exports, "default", ()=>BudgetButton);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _s = $RefreshSig$();
-function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, selectedBudget, subtractFromBudget }) {
+function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, selectedBudget, updateBudget }) {
     _s();
     const [progressBarValue, setProgressBarValue] = (0, _react.useState)(0);
-    const [remainingValue, setRemainingValue] = (0, _react.useState)(remaining);
-    const [maxValue, setMaxValue] = (0, _react.useState)(max);
     const [moreOptionsVisible, setMoreOptionsVisible] = (0, _react.useState)(false);
-    const [inputValue, setInputValue] = (0, _react.useState)(0);
+    const [titleSubmitVisible, setTitleSubmitVisible] = (0, _react.useState)(false);
+    const [input, setInput] = (0, _react.useState)(0);
     const [titleValue, setTitleValue] = (0, _react.useState)(title);
-    const onBoxClick = ()=>{
-        selectBudget(id);
-    };
-    const onSubClick = ()=>{
-        const updatedRemainder = Math.max(remainingValue - parseInt(inputValue), 0);
-        subtractFromBudget(id, updatedRemainder);
-    };
-    const onMoreOptionsClick = ()=>{
-        setMoreOptionsVisible(true);
-    };
-    const onAddClick = ()=>{
-        setRemainingValue((prev)=>Math.min(prev + parseInt(inputValue), maxValue));
-        setDefaultView();
-    };
-    const onMaxClick = ()=>{
-        setMaxValue(parseInt(inputValue));
-        if (remainingValue > parseInt(inputValue)) setRemainingValue(parseInt(inputValue));
-    };
-    const onDeleteClick = ()=>{
-        deleteBudget(id);
-    };
-    const setDefaultView = ()=>{
-        setMoreOptionsVisible(false);
-    };
     (0, _react.useEffect)(()=>{
         if (selectedBudget !== id) setMoreOptionsVisible(false);
     }, [
         selectedBudget,
         id
     ]);
-    const adjustmentButtonsClass = "text-slate-300 min-h-32 font-semibold text-[20px] sm:text-[24px] md:text-[34px] rounded-xl border-8 p-1 w-full";
     (0, _react.useEffect)(()=>{
-        setProgressBarValue(Math.floor(remainingValue / maxValue * 100));
+        setProgressBarValue(Math.floor(remaining / max * 100));
     }, [
-        remainingValue,
-        maxValue
+        remaining,
+        max
     ]);
+    const onSubClick = ()=>input > 0 && updateBudget({
+            id,
+            newRemaining: Math.max(remaining - input, 0)
+        });
+    const onAddClick = ()=>input > 0 && updateBudget({
+            id,
+            newRemaining: Math.min(remaining + input, max)
+        });
+    const onMaxClick = ()=>remaining > input ? updateBudget({
+            id,
+            newMax: input,
+            newRemaining: input
+        }) : updateBudget({
+            id,
+            newMax: input
+        });
+    const onBoxClick = ()=>selectBudget(id);
+    const onMoreOptionsClick = ()=>setMoreOptionsVisible(true);
+    const onDeleteClick = ()=>deleteBudget(id);
+    const trackInput = (newValue)=>setInput(parseInt(newValue));
+    const trackTitle = (newTitle)=>updateBudget({
+            id,
+            newTitle: newTitle
+        });
+    const adjustmentButtonsClass = "items-center justify-center text-slate-300 min-h-32 font-semibold text-[20px] sm:text-[24px] md:text-[34px] rounded-xl border-8 p-1 w-full";
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "flex flex-col items-center",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
                 className: "text-slate-400 font-semibold italic text-center text-[20px] md:text-[30px] mb-2",
-                children: titleValue
+                children: title
             }, void 0, false, {
                 fileName: "src/components/BudgetButton.jsx",
-                lineNumber: 70,
+                lineNumber: 51,
                 columnNumber: 7
             }, this),
             selectedBudget !== id ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -18785,18 +18775,18 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                         className: "text-[50px] md:text-[95px] text-slate-300 font-extrabold text-left pl-4 group-hover:text-slate-800",
-                        children: `$${remainingValue}`
+                        children: `$${remaining}`
                     }, void 0, false, {
                         fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 78,
+                        lineNumber: 59,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                         className: "text-[28px] md:text-[46px] text-slate-400 font-normal text-right pr-4 pb-2 group-hover:text-slate-800 self-end",
-                        children: ` / $${maxValue}`
+                        children: ` / $${max}`
                     }, void 0, false, {
                         fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 81,
+                        lineNumber: 62,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18807,13 +18797,13 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
                         className: `${progressBarValue > 35 ? "bg-green-400" : "bg-red-400"} h-10 mt-auto rounded-xl`
                     }, void 0, false, {
                         fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 84,
+                        lineNumber: 65,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/BudgetButton.jsx",
-                lineNumber: 74,
+                lineNumber: 55,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 className: "flex flex-col border-8 border-slate-300 rounded-3xl w-full p-2 md:p-4 max-w-[448px]",
@@ -18825,12 +18815,13 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
                                 autoFocus: true,
                                 placeholder: "0",
                                 maxLength: 10,
-                                value: inputValue || "",
-                                onChange: (e)=>setInputValue(e.target.value),
+                                value: input || "",
+                                onFocus: ()=>setInput(0),
+                                onChange: (e)=>trackInput(e.target.value),
                                 className: "rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl w-[95%] md:w-[75%] outline-none border-slate-300 border-4 text-slate-300 font-semibold px-2"
                             }, void 0, false, {
                                 fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 97,
+                                lineNumber: 78,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18838,30 +18829,30 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                         className: "text-[30px] text-slate-300 font-extrabold",
-                                        children: `$${remainingValue}`
+                                        children: `$${remaining}`
                                     }, void 0, false, {
                                         fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 106,
+                                        lineNumber: 88,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                                         className: "text-[24px] text-slate-300 font-normal",
-                                        children: ` / $${maxValue}`
+                                        children: ` / $${max}`
                                     }, void 0, false, {
                                         fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 109,
+                                        lineNumber: 91,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 105,
+                                lineNumber: 87,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 96,
+                        lineNumber: 77,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18873,7 +18864,7 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
                                 children: "subtract"
                             }, void 0, false, {
                                 fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 115,
+                                lineNumber: 97,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -18882,7 +18873,7 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
                                 children: "- more options -"
                             }, void 0, false, {
                                 fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 121,
+                                lineNumber: 103,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18894,7 +18885,7 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
                                         children: "add"
                                     }, void 0, false, {
                                         fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 132,
+                                        lineNumber: 114,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -18903,7 +18894,7 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
                                         children: "max"
                                     }, void 0, false, {
                                         fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 138,
+                                        lineNumber: 120,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -18912,52 +18903,54 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
                                         children: "delete"
                                     }, void 0, false, {
                                         fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 144,
+                                        lineNumber: 126,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 127,
+                                lineNumber: 109,
                                 columnNumber: 13
                             }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: `gap-4 justify-between ${moreOptionsVisible ? "flex" : "hidden"}`,
-                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                    placeholder: "rename",
-                                    maxLength: 20,
-                                    onChange: (e)=>setTitleValue(e.target.value),
-                                    className: "mx-auto rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl w-full outline-none border-slate-300 border-4 text-slate-300 font-semibold px-2"
-                                }, void 0, false, {
-                                    fileName: "src/components/BudgetButton.jsx",
-                                    lineNumber: 156,
-                                    columnNumber: 15
-                                }, this)
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                placeholder: "rename",
+                                maxLength: 20,
+                                onFocus: ()=>setTitleSubmitVisible(true),
+                                onChange: (e)=>trackTitle(e.target.value),
+                                className: `${moreOptionsVisible ? "flex" : "hidden"} mx-auto rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl w-full outline-none border-slate-300 border-4 text-slate-300 font-semibold px-2`
                             }, void 0, false, {
                                 fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 151,
+                                lineNumber: 134,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                className: `${adjustmentButtonsClass} ${titleSubmitVisible ? "flex" : "hidden"}  text-red-400 border-red-400 hover:bg-red-400 hover:text-slate-800`,
+                                children: "confirm"
+                            }, void 0, false, {
+                                fileName: "src/components/BudgetButton.jsx",
+                                lineNumber: 143,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 114,
+                        lineNumber: 96,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/BudgetButton.jsx",
-                lineNumber: 95,
+                lineNumber: 76,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/BudgetButton.jsx",
-        lineNumber: 69,
+        lineNumber: 50,
         columnNumber: 5
     }, this);
 }
-_s(BudgetButton, "ClsIyvr24QHL0nWr0oi7U4ZWAfM=");
+_s(BudgetButton, "IUfXaAh437h+sEbS3JOHtZtwxj8=");
 _c = BudgetButton;
 var _c;
 $RefreshReg$(_c, "BudgetButton");
@@ -19192,7 +19185,7 @@ parcelHelpers.defineInteropFlag(exports);
 class DataHandler {
     getStoredData = ()=>{
         const storedData = localStorage.getItem("data");
-        if (!storedData) this.createNewStoredData();
+        if (!storedData) return this.createNewStoredData();
         return JSON.parse(storedData);
     };
     setStoredData = (newData)=>{
@@ -19208,6 +19201,7 @@ class DataHandler {
             }
         ];
         this.setStoredData(newData);
+        return newData;
     }
 }
 exports.default = DataHandler;

@@ -55,7 +55,7 @@ export default function BudgetButton({
   const colorHover = (color) =>
     `text-${color}-400 border-${color}-400 hover:bg-${color}-400 hover:text-slate-800 bg-${color}-400/10`;
   const adjustmentButtonsClass =
-    "items-center justify-center text-slate-300 min-h-32 font-semibold text-3x; sm:text-4xl md:text-5xl rounded-xl border-8 p-1 w-full";
+    "items-center justify-center min-h-32 font-semibold text-4xl md:text-5xl rounded-xl border-8 p-1 w-full";
 
   return (
     <div className="flex flex-col items-center">
@@ -89,11 +89,11 @@ export default function BudgetButton({
             <input
               autoFocus={true}
               placeholder="0"
-              maxLength={10}
+              maxLength={5}
               value={input || ""}
               onFocus={() => setInput(0)}
               onChange={(e) => trackInput(e.target.value)}
-              className="rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl md:w-1/2 outline-none border-slate-300 border-4 text-slate-300 font-semibold px-2 mb-2"
+              className="rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl w-full md:w-1/2 outline-none border-slate-300 border-4 text-slate-300 font-semibold px-4 mb-2"
             ></input>
             <div className="hidden md:flex flex-col items-end w-[25%]">
               <p className="text-6xl text-slate-300 font-extrabold">
@@ -113,15 +113,15 @@ export default function BudgetButton({
             </button>
             <button
               onClick={() => onMoreOptionsClick()}
-              className={`text-slate-300 min-h-20 font-semibold text-4xl ${
+              className={`text-slate-500 min-h-20 font-semibold text-5xl ${
                 moreOptionsVisible ? "hidden" : "block"
               }`}
             >
-              - more options -
+              more options
             </button>
             <div
-              className={`gap-6 justify-between pb-2 min-h-20 ${
-                moreOptionsVisible ? "flex" : "hidden"
+              className={`gap-2 sm:gap-4 md:gap-6 justify-between pb-2 min-h-20 ${
+                moreOptionsVisible ? "flex flex-col sm:flex-row" : "hidden"
               }`}
             >
               <button
@@ -158,13 +158,13 @@ export default function BudgetButton({
                 onChange={(e) => trackTitle(e.target.value)}
                 className={`${
                   moreOptionsVisible ? "flex" : "hidden"
-                } mx-auto rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl w-full outline-none border-slate-300 border-4 text-slate-300 font-semibold px-2 mb-4`}
+                } mx-auto rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl w-full outline-none border-slate-300 border-4 text-slate-300 font-semibold px-4 mb-4`}
               ></input>
               <button
                 onClick={() => onTitleChangeClick()}
-                className={`${adjustmentButtonsClass} ${
-                  titleSubmitVisible ? "flex" : "hidden"
-                }  text-red-400 border-red-400 hover:bg-red-400 hover:text-slate-800`}
+                className={`${
+                  adjustmentButtonsClass + " " + colorHover("blue")
+                } ${titleSubmitVisible ? "flex" : "hidden"} `}
               >
                 confirm
               </button>

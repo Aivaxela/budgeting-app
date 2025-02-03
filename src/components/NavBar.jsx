@@ -5,9 +5,6 @@ export default function NavBar() {
         <h1 className="bgRef font-extrabold text-4xl md:text-6xl text-center text-slate-300 opacity-75">
           NBS Budget
         </h1>
-        {/* <button className="text-slate-300 text-3xl border-8 border-slate-300 font-bold rounded-3xl p-2 bg-slate-800 opacity-75">
-          Select Profile
-        </button> */}
       </div>
     </div>
   );

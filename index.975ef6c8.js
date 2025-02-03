@@ -18610,6 +18610,7 @@ function App() {
         setSelectedBudget(0);
     };
     const updateBudget = ({ id, newRemaining, newMax, newTitle })=>{
+        console.log("budget updating ", newTitle);
         const updatedData = budgets.map((budget)=>{
             if (budget.id === id) return {
                 ...budget,
@@ -18636,17 +18637,17 @@ function App() {
     const selectBudget = (id)=>setSelectedBudget(id);
     const handleBgClick = (e)=>e.target.classList.contains("bgRef") && setSelectedBudget(0);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "bgRef justify-center border-black p-8 bg-slate-800 min-h-screen min-w-[320px]",
+        className: "bgRef justify-center border-black p-8 bg-slate-700 min-h-screen min-w-[320px]",
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             className: "max-w-5xl mx-auto",
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navBarDefault.default), {}, void 0, false, {
                     fileName: "src/components/App.jsx",
-                    lineNumber: 72,
+                    lineNumber: 74,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                    className: "grid grid-cols-1 sm:grid-cols-2 gap-8 mt-28",
+                    className: "flex flex-col gap-8 mt-28",
                     children: [
                         budgets.map((budget)=>{
                             return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _budgetButtonDefault.default), {
@@ -18660,7 +18661,7 @@ function App() {
                                 updateBudget: updateBudget
                             }, budget.id, false, {
                                 fileName: "src/components/App.jsx",
-                                lineNumber: 76,
+                                lineNumber: 78,
                                 columnNumber: 15
                             }, this);
                         }),
@@ -18670,24 +18671,24 @@ function App() {
                             children: "+"
                         }, void 0, false, {
                             fileName: "src/components/App.jsx",
-                            lineNumber: 89,
+                            lineNumber: 91,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/App.jsx",
-                    lineNumber: 73,
+                    lineNumber: 75,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/App.jsx",
-            lineNumber: 71,
+            lineNumber: 73,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "src/components/App.jsx",
-        lineNumber: 70,
+        lineNumber: 72,
         columnNumber: 5
     }, this);
 }
@@ -18733,52 +18734,55 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
         remaining,
         max
     ]);
-    const onSubClick = ()=>input > 0 && updateBudget({
+    const onSubClick = ()=>input > 0 && input && updateBudget({
             id,
             newRemaining: Math.max(remaining - input, 0)
         });
-    const onAddClick = ()=>input > 0 && updateBudget({
+    const onAddClick = ()=>input && input > 0 && updateBudget({
             id,
             newRemaining: Math.min(remaining + input, max)
         });
-    const onMaxClick = ()=>remaining > input ? updateBudget({
+    const onMaxClick = ()=>input && (remaining > input ? updateBudget({
             id,
             newMax: input,
             newRemaining: input
         }) : updateBudget({
             id,
             newMax: input
+        }));
+    const hideTitleSubmitButtonAfterTime = ()=>setTimeout(()=>setTitleSubmitVisible(false), 200);
+    const onTitleChangeClick = ()=>titleValue && updateBudget({
+            id,
+            newTitle: titleValue
         });
     const onBoxClick = ()=>selectBudget(id);
     const onMoreOptionsClick = ()=>setMoreOptionsVisible(true);
     const onDeleteClick = ()=>deleteBudget(id);
     const trackInput = (newValue)=>setInput(parseInt(newValue));
-    const trackTitle = (newTitle)=>updateBudget({
-            id,
-            newTitle: newTitle
-        });
-    const adjustmentButtonsClass = "items-center justify-center text-slate-300 min-h-32 font-semibold text-[20px] sm:text-[24px] md:text-[34px] rounded-xl border-8 p-1 w-full";
+    const trackTitle = (newTitle)=>setTitleValue(newTitle);
+    const colorHover = (color)=>`text-${color}-400 border-${color}-400 hover:bg-${color}-400 hover:text-slate-800 bg-${color}-400/10`;
+    const adjustmentButtonsClass = "items-center justify-center min-h-32 font-semibold text-4xl md:text-5xl rounded-xl border-8 p-1 w-full";
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "flex flex-col items-center",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
-                className: "text-slate-400 font-semibold italic text-center text-[20px] md:text-[30px] mb-2",
+                className: "text-slate-200 font-medium italic self-start px-10 py-1 text-xl md:text-3xl mb-2 pl-10 bg-slate-600 rounded-lg",
                 children: title
             }, void 0, false, {
                 fileName: "src/components/BudgetButton.jsx",
-                lineNumber: 51,
+                lineNumber: 62,
                 columnNumber: 7
             }, this),
             selectedBudget !== id ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                 onClick: ()=>onBoxClick(),
-                className: " flex flex-col border-8 border-slate-300 rounded-3xl w-full max-w-[448px] p-4 hover:bg-slate-300 group",
+                className: " flex flex-col border-8 bg-slate-800 border-slate-300 rounded-md w-full p-4 hover:bg-slate-300 group shadow-2xl",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                         className: "text-[50px] md:text-[95px] text-slate-300 font-extrabold text-left pl-4 group-hover:text-slate-800",
                         children: `$${remaining}`
                     }, void 0, false, {
                         fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 59,
+                        lineNumber: 70,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
@@ -18786,7 +18790,7 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
                         children: ` / $${max}`
                     }, void 0, false, {
                         fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 62,
+                        lineNumber: 73,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18797,156 +18801,166 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
                         className: `${progressBarValue > 35 ? "bg-green-400" : "bg-red-400"} h-10 mt-auto rounded-xl`
                     }, void 0, false, {
                         fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 65,
+                        lineNumber: 76,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/BudgetButton.jsx",
-                lineNumber: 55,
+                lineNumber: 66,
                 columnNumber: 9
             }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "flex flex-col border-8 border-slate-300 rounded-3xl w-full p-2 md:p-4 max-w-[448px]",
+                className: "flex flex-col border-8 bg-slate-800 border-slate-300 rounded-lg w-full p-2 md:p-4",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "flex flex-col md:flex-row items-center mb-2",
+                        className: "flex flex-col md:flex-row items-center justify-between mb-2",
                         children: [
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                                 autoFocus: true,
                                 placeholder: "0",
-                                maxLength: 10,
+                                maxLength: 5,
                                 value: input || "",
                                 onFocus: ()=>setInput(0),
                                 onChange: (e)=>trackInput(e.target.value),
-                                className: "rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl w-[95%] md:w-[75%] outline-none border-slate-300 border-4 text-slate-300 font-semibold px-2"
+                                className: "rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl w-full md:w-1/2 outline-none border-slate-300 border-4 text-slate-300 font-semibold px-4 mb-2"
                             }, void 0, false, {
                                 fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 78,
+                                lineNumber: 89,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                                 className: "hidden md:flex flex-col items-end w-[25%]",
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                        className: "text-[30px] text-slate-300 font-extrabold",
+                                        className: "text-6xl text-slate-300 font-extrabold",
                                         children: `$${remaining}`
                                     }, void 0, false, {
                                         fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 88,
+                                        lineNumber: 99,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                        className: "text-[24px] text-slate-300 font-normal",
+                                        className: "text-3xl text-slate-300 font-normal",
                                         children: ` / $${max}`
                                     }, void 0, false, {
                                         fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 91,
+                                        lineNumber: 102,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 87,
+                                lineNumber: 98,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 77,
+                        lineNumber: 88,
                         columnNumber: 11
                     }, this),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "flex flex-col gap-2 h-auto justify-between",
+                        className: "flex flex-col gap-10 h-auto justify-between",
                         children: [
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                                 onClick: ()=>onSubClick(),
-                                className: " w-full min-h-32 font-semibold text-4xl sm:text-5xl md:text-6xl rounded-xl border-8 p-1 text-red-400 border-red-400 hover:bg-red-400 hover:text-slate-800",
+                                className: " w-full min-h-32 font-semibold text-4xl sm:text-5xl md:text-6xl rounded-xl border-8 p-1 bg-red-400/10 text-red-500 border-red-400 hover:bg-red-400 hover:text-slate-800",
                                 children: "subtract"
                             }, void 0, false, {
                                 fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 97,
+                                lineNumber: 108,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                                 onClick: ()=>onMoreOptionsClick(),
-                                className: "text-slate-300 min-h-20 font-semibold text-4xl",
-                                children: "- more options -"
+                                className: `text-slate-500 min-h-20 font-semibold text-5xl ${moreOptionsVisible ? "hidden" : "block"}`,
+                                children: "more options"
                             }, void 0, false, {
                                 fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 103,
+                                lineNumber: 114,
                                 columnNumber: 13
                             }, this),
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: `gap-1 justify-between pb-2 min-h-20 ${moreOptionsVisible ? "flex" : "hidden"}`,
+                                className: `gap-2 sm:gap-4 md:gap-6 justify-between pb-2 min-h-20 ${moreOptionsVisible ? "flex flex-col sm:flex-row" : "hidden"}`,
                                 children: [
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                                         onClick: ()=>onAddClick(),
-                                        className: `${adjustmentButtonsClass} text-green-400 border-green-400 hover:bg-green-400 hover:text-slate-800`,
+                                        className: `${adjustmentButtonsClass + " " + colorHover("green")} `,
                                         children: "add"
                                     }, void 0, false, {
                                         fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 114,
+                                        lineNumber: 127,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                                         onClick: ()=>onMaxClick(),
-                                        className: `${adjustmentButtonsClass} text-purple-400 border-purple-400 hover:bg-purple-400 hover:text-slate-800`,
+                                        className: `${adjustmentButtonsClass + " " + colorHover("purple")} `,
                                         children: "max"
                                     }, void 0, false, {
                                         fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 120,
+                                        lineNumber: 135,
                                         columnNumber: 15
                                     }, this),
                                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                                         onClick: ()=>onDeleteClick(),
-                                        className: `${adjustmentButtonsClass} text-red-400 border-red-400 hover:bg-red-400 hover:text-slate-800`,
+                                        className: `${adjustmentButtonsClass + " " + colorHover("red")}`,
                                         children: "delete"
                                     }, void 0, false, {
                                         fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 126,
+                                        lineNumber: 143,
                                         columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 109,
+                                lineNumber: 122,
                                 columnNumber: 13
                             }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                placeholder: "rename",
-                                maxLength: 20,
-                                onFocus: ()=>setTitleSubmitVisible(true),
-                                onChange: (e)=>trackTitle(e.target.value),
-                                className: `${moreOptionsVisible ? "flex" : "hidden"} mx-auto rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl w-full outline-none border-slate-300 border-4 text-slate-300 font-semibold px-2`
-                            }, void 0, false, {
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                        placeholder: "rename",
+                                        maxLength: 20,
+                                        onFocus: ()=>setTitleSubmitVisible(true),
+                                        onBlur: ()=>hideTitleSubmitButtonAfterTime(),
+                                        onChange: (e)=>trackTitle(e.target.value),
+                                        className: `${moreOptionsVisible ? "flex" : "hidden"} mx-auto rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl w-full outline-none border-slate-300 border-4 text-slate-300 font-semibold px-4 mb-4`
+                                    }, void 0, false, {
+                                        fileName: "src/components/BudgetButton.jsx",
+                                        lineNumber: 153,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                        onClick: ()=>onTitleChangeClick(),
+                                        className: `${adjustmentButtonsClass + " " + colorHover("blue")} ${titleSubmitVisible ? "flex" : "hidden"} `,
+                                        children: "confirm"
+                                    }, void 0, false, {
+                                        fileName: "src/components/BudgetButton.jsx",
+                                        lineNumber: 163,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 134,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                className: `${adjustmentButtonsClass} ${titleSubmitVisible ? "flex" : "hidden"}  text-red-400 border-red-400 hover:bg-red-400 hover:text-slate-800`,
-                                children: "confirm"
-                            }, void 0, false, {
-                                fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 143,
+                                lineNumber: 152,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 96,
+                        lineNumber: 107,
                         columnNumber: 11
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "src/components/BudgetButton.jsx",
-                lineNumber: 76,
+                lineNumber: 87,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "src/components/BudgetButton.jsx",
-        lineNumber: 50,
+        lineNumber: 61,
         columnNumber: 5
     }, this);
 }

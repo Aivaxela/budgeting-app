@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import BudgetButton from "./BudgetButton";
 import NavBar from "./NavBar";
 import DataHandler from "../utils/dataHandler";
+import SettingsModal from "./SettingsModal";
 
 const dataHandler = new DataHandler();
 
 export function App() {
   const [budgets, setBudgets] = useState([]);
   const [selectedBudget, setSelectedBudget] = useState(0);
+  const [settingsModalVisible, setSettingsModalVisible] = useState(false);
 
   useEffect(() => {
     const storedData = dataHandler.getStoredData();
@@ -67,8 +69,8 @@ export function App() {
 
   return (
     <div className="bgRef justify-center border-black p-8 bg-slate-700 min-h-screen min-w-[320px]">
-      <div className="max-w-5xl mx-auto">
-        <NavBar />
+      <div className="relative max-w-5xl mx-auto">
+        <NavBar setSettingsModalVisible={setSettingsModalVisible} />
         <div className="flex flex-col gap-8 mt-28">
           {budgets.map((budget) => {
             return (
@@ -92,6 +94,10 @@ export function App() {
             +
           </button>
         </div>
+        <SettingsModal
+          settingsModalVisible={settingsModalVisible}
+          setSettingsModalVisible={setSettingsModalVisible}
+        />
       </div>
     </div>
   );

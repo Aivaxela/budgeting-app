@@ -18598,7 +18598,6 @@ function App() {
             max: 100,
             id: newId
         };
-        console.log(...budgets);
         setBudgets([
             ...budgets,
             newBudget
@@ -18643,7 +18642,7 @@ function App() {
             children: [
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navBarDefault.default), {}, void 0, false, {
                     fileName: "src/components/App.jsx",
-                    lineNumber: 74,
+                    lineNumber: 73,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -18661,7 +18660,7 @@ function App() {
                                 updateBudget: updateBudget
                             }, budget.id, false, {
                                 fileName: "src/components/App.jsx",
-                                lineNumber: 78,
+                                lineNumber: 77,
                                 columnNumber: 15
                             }, this);
                         }),
@@ -18671,24 +18670,24 @@ function App() {
                             children: "+"
                         }, void 0, false, {
                             fileName: "src/components/App.jsx",
-                            lineNumber: 91,
+                            lineNumber: 90,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "src/components/App.jsx",
-                    lineNumber: 75,
+                    lineNumber: 74,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "src/components/App.jsx",
-            lineNumber: 73,
+            lineNumber: 72,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "src/components/App.jsx",
-        lineNumber: 72,
+        lineNumber: 71,
         columnNumber: 5
     }, this);
 }
@@ -18702,7 +18701,7 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./BudgetButton":"fjHCn","./NavBar":"eqUVf","../utils/dataHandler":"5HMjw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fjHCn":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./BudgetButton":"fjHCn","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./NavBar":"eqUVf","../utils/dataHandler":"5HMjw"}],"fjHCn":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$16bd = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -18760,7 +18759,7 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
     const onDeleteClick = ()=>deleteBudget(id);
     const trackInput = (newValue)=>setInput(parseInt(newValue));
     const trackTitle = (newTitle)=>setTitleValue(newTitle);
-    const colorHover = (color)=>`text-${color}-400 border-${color}-400 hover:bg-${color}-400 hover:text-slate-800 bg-${color}-400/10`;
+    const colorHover = (color)=>`text-slate-800 hover:text-${color}-400 bg-${color}-400 hover:bg-slate-800 border-${color}-400`;
     const adjustmentButtonsClass = "items-center justify-center min-h-32 font-semibold text-4xl md:text-5xl rounded-xl border-8 p-1 w-full";
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "flex flex-col items-center",
@@ -18775,7 +18774,7 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
             }, this),
             selectedBudget !== id ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                 onClick: ()=>onBoxClick(),
-                className: " flex flex-col border-8 bg-slate-800 border-slate-300 rounded-md w-full p-4 hover:bg-slate-300 group shadow-2xl",
+                className: "flex flex-col relative border-8 bg-slate-800 border-slate-300 rounded-md w-full p-4 hover:bg-slate-300 group shadow-2xl",
                 children: [
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
                         className: "text-[50px] md:text-[95px] text-slate-300 font-extrabold text-left pl-4 group-hover:text-slate-800",
@@ -18798,7 +18797,7 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
                             width: progressBarValue.toString() + "%",
                             transition: "width 0.5s, background-color 0.5s"
                         },
-                        className: `${progressBarValue > 35 ? "bg-green-400" : "bg-red-400"} h-10 mt-auto rounded-xl`
+                        className: `${progressBarValue > 35 ? "bg-orange-400" : "bg-red-400"} h-10 mt-auto rounded-xl`
                     }, void 0, false, {
                         fileName: "src/components/BudgetButton.jsx",
                         lineNumber: 76,
@@ -18864,7 +18863,7 @@ function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, s
                         children: [
                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                                 onClick: ()=>onSubClick(),
-                                className: " w-full min-h-32 font-semibold text-4xl sm:text-5xl md:text-6xl rounded-xl border-8 p-1 bg-red-400/10 text-red-500 border-red-400 hover:bg-red-400 hover:text-slate-800",
+                                className: `${adjustmentButtonsClass + " " + colorHover("red")}`,
                                 children: "subtract"
                             }, void 0, false, {
                                 fileName: "src/components/BudgetButton.jsx",

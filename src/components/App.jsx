@@ -29,15 +29,12 @@ export function App() {
       max: 100,
       id: newId,
     };
-    console.log(...budgets);
     setBudgets([...budgets, newBudget]);
     dataHandler.setStoredData([...budgets, newBudget]);
     setSelectedBudget(0);
   };
 
   const updateBudget = ({ id, newRemaining, newMax, newTitle }) => {
-    console.log("budget updating ", newTitle);
-
     const updatedData = budgets.map((budget) => {
       if (budget.id === id)
         return {

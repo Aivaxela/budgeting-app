@@ -25,9 +25,7 @@ export default function BudgetButton({
   }, [remaining, max]);
 
   const onSubClick = () =>
-    input > 0 &&
-    input &&
-    updateBudget({ id, newRemaining: Math.max(remaining - input, 0) });
+    input > 0 && input && updateBudget({ id, newRemaining: remaining - input });
 
   const onAddClick = () =>
     input &&
@@ -53,7 +51,7 @@ export default function BudgetButton({
   const trackTitle = (newTitle) => setTitleValue(newTitle);
 
   const colorHover = (color) =>
-    `text-${color}-400 border-${color}-400 hover:bg-${color}-400 hover:text-slate-800 bg-${color}-400/10`;
+    `text-slate-800 hover:text-${color}-400 border-${color}-400 bg-${color}-400 hover:bg-slate-800`;
   const adjustmentButtonsClass =
     "items-center justify-center min-h-32 font-semibold text-4xl md:text-5xl rounded-xl border-8 p-1 w-full";
 
@@ -68,7 +66,7 @@ export default function BudgetButton({
           className=" flex flex-col border-8 bg-slate-800 border-slate-300 rounded-md w-full p-4 hover:bg-slate-300 group shadow-2xl"
         >
           <p className="text-[50px] md:text-[95px] text-slate-300 font-extrabold text-left pl-4 group-hover:text-slate-800">
-            {`$${remaining}`}
+            {`${remaining >= 0 ? "$" + remaining : "-$" + Math.abs(remaining)}`}
           </p>
           <p className="text-[28px] md:text-[46px] text-slate-400 font-normal text-right pr-4 pb-2 group-hover:text-slate-800 self-end">
             {` / $${max}`}
@@ -107,7 +105,7 @@ export default function BudgetButton({
           <div className="flex flex-col gap-10 h-auto justify-between">
             <button
               onClick={() => onSubClick()}
-              className=" w-full min-h-32 font-semibold text-4xl sm:text-5xl md:text-6xl rounded-xl border-8 p-1 bg-red-400/10 text-red-500 border-red-400 hover:bg-red-400 hover:text-slate-800"
+              className={`${adjustmentButtonsClass + " " + colorHover("red")}`}
             >
               subtract
             </button>

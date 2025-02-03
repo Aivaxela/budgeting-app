@@ -36,6 +36,8 @@ export function App() {
   };
 
   const updateBudget = ({ id, newRemaining, newMax, newTitle }) => {
+    console.log("budget updating ", newTitle);
+
     const updatedData = budgets.map((budget) => {
       if (budget.id === id)
         return {
@@ -67,10 +69,10 @@ export function App() {
     e.target.classList.contains("bgRef") && setSelectedBudget(0);
 
   return (
-    <div className="bgRef justify-center border-black p-8 bg-slate-800 min-h-screen min-w-[320px]">
+    <div className="bgRef justify-center border-black p-8 bg-slate-700 min-h-screen min-w-[320px]">
       <div className="max-w-5xl mx-auto">
         <NavBar />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-28">
+        <div className="flex flex-col gap-8 mt-28">
           {budgets.map((budget) => {
             return (
               <BudgetButton

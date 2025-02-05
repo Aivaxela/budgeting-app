@@ -1,3 +1,5 @@
+import { TiCogOutline } from "react-icons/ti";
+
 export default function NavBar({ setSettingsModalVisible }) {
   return (
     <div className="fixed top-0 left-0 w-full p-4 backdrop-blur-xl backdrop-brightness-90">
@@ -7,9 +9,9 @@ export default function NavBar({ setSettingsModalVisible }) {
         </h1>
         <button
           onClick={() => setSettingsModalVisible(true)}
-          className="font-extrabold text-3xl md:text-4xl opacity-50 hover:opacity-100 rounded-full border-8 h-20 w-20 bg-slate-800 hover:bg-slate-300 border-slate-800 text-slate-300 hover:text-slate-800 p-2"
+          className="font-extrabold justify-items-center text-3xl md:text-4xl opacity-50 hover:opacity-100 rounded-full border-8 h-20 w-20 bg-slate-800 hover:bg-slate-300 border-slate-800 text-slate-300 hover:text-slate-800 p-2"
         >
-          ⚙
+          <TiCogOutline />
         </button>
       </div>
     </div>

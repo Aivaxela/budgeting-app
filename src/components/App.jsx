@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import "react-icons";
 import BudgetButton from "./BudgetButton";
 import NavBar from "./NavBar";
 import DataHandler from "../utils/dataHandler";
 import SettingsModal from "./SettingsModal";
+import ConfirmModal from "./ConfirmModal";
 
 const dataHandler = new DataHandler();
 
@@ -10,6 +12,8 @@ export function App() {
   const [budgets, setBudgets] = useState([]);
   const [selectedBudget, setSelectedBudget] = useState(0);
   const [settingsModalVisible, setSettingsModalVisible] = useState(false);
+  const [confirmModalVisible, setConfirmModalVisible] = useState(false);
+  const [confirmProps, setConfirmProps] = useState({});
 
   useEffect(() => {
     const storedData = dataHandler.getStoredData();
@@ -42,10 +46,12 @@ export function App() {
         return {
           ...budget,
           remaining:
-            newRemaining || newRemaining === 0
-              ? newRemaining
-              : budget.remaining,
-          max: newMax || budget.max,
+            Math.round(
+              (newRemaining || newRemaining === 0
+                ? newRemaining
+                : budget.remaining) * 100
+            ) / 100,
+          max: Math.abs(Math.round((newMax || budget.max) * 100) / 100),
           title: newTitle || budget.title,
         };
       return budget;
@@ -61,6 +67,11 @@ export function App() {
     const newData = budgets.filter((item) => item.id !== id);
     setBudgets([...newData]);
     dataHandler.setStoredData(newData);
+  };
+
+  const openConfirmModal = (action, message) => {
+    setConfirmModalVisible(true);
+    setConfirmProps({ action, message });
   };
 
   const selectBudget = (id) => setSelectedBudget(id);
@@ -84,6 +95,7 @@ export function App() {
                 selectBudget={selectBudget}
                 selectedBudget={selectedBudget}
                 updateBudget={updateBudget}
+                openConfirmModal={openConfirmModal}
               />
             );
           })}
@@ -97,6 +109,12 @@ export function App() {
         <SettingsModal
           settingsModalVisible={settingsModalVisible}
           setSettingsModalVisible={setSettingsModalVisible}
+        />
+        <ConfirmModal
+          confirmModalVisible={confirmModalVisible}
+          setConfirmModalVisible={setConfirmModalVisible}
+          action={confirmProps.action}
+          message={confirmProps.message}
         />
       </div>
     </div>

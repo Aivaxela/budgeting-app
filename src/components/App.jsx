@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "react-icons";
-import BudgetButton from "./BudgetButton";
+import BudgetButtons from "./BudgetButtons";
 import NavBar from "./NavBar";
 import DataHandler from "../utils/dataHandler";
 import SettingsModal from "./SettingsModal";
 import ConfirmModal from "./ConfirmModal";
+import { BudgetsContext } from "../contexts/BudgetsContext";
 
 const dataHandler = new DataHandler();
 
@@ -78,44 +79,32 @@ export function App() {
   const handleBgClick = (e) =>
     e.target.classList.contains("bgRef") && setSelectedBudget(0);
 
+  const budgetsContext = {
+    budgets,
+    addNewBudget,
+    updateBudget,
+    deleteBudget,
+    selectBudget,
+    selectedBudget,
+  };
+
   return (
     <div className="bgRef justify-center border-black p-8 bg-slate-700 min-h-screen min-w-[320px]">
       <div className="relative max-w-5xl mx-auto">
-        <NavBar setSettingsModalVisible={setSettingsModalVisible} />
-        <div className="flex flex-col gap-8 mt-28">
-          {budgets.map((budget) => {
-            return (
-              <BudgetButton
-                key={budget.id}
-                title={budget.title}
-                remaining={budget.remaining}
-                max={budget.max}
-                id={budget.id}
-                deleteBudget={deleteBudget}
-                selectBudget={selectBudget}
-                selectedBudget={selectedBudget}
-                updateBudget={updateBudget}
-                openConfirmModal={openConfirmModal}
-              />
-            );
-          })}
-          <button
-            onClick={() => addNewBudget()}
-            className="text-slate-300 font-extrabold text-[72px]"
-          >
-            +
-          </button>
-        </div>
-        <SettingsModal
-          settingsModalVisible={settingsModalVisible}
-          setSettingsModalVisible={setSettingsModalVisible}
-        />
-        <ConfirmModal
-          confirmModalVisible={confirmModalVisible}
-          setConfirmModalVisible={setConfirmModalVisible}
-          action={confirmProps.action}
-          message={confirmProps.message}
-        />
+        <BudgetsContext.Provider value={budgetsContext}>
+          <NavBar setSettingsModalVisible={setSettingsModalVisible} />
+          <BudgetButtons openConfirmModal={openConfirmModal} />
+          <SettingsModal
+            settingsModalVisible={settingsModalVisible}
+            setSettingsModalVisible={setSettingsModalVisible}
+          />
+          <ConfirmModal
+            confirmModalVisible={confirmModalVisible}
+            setConfirmModalVisible={setConfirmModalVisible}
+            action={confirmProps.action}
+            message={confirmProps.message}
+          />
+        </BudgetsContext.Provider>
       </div>
     </div>
   );

@@ -18571,8 +18571,8 @@ var _jsxDevRuntime = require("react/jsx-dev-runtime");
 var _react = require("react");
 var _reactDefault = parcelHelpers.interopDefault(_react);
 var _reactIcons = require("react-icons");
-var _budgetButton = require("./BudgetButton");
-var _budgetButtonDefault = parcelHelpers.interopDefault(_budgetButton);
+var _budgetButtons = require("./BudgetButtons");
+var _budgetButtonsDefault = parcelHelpers.interopDefault(_budgetButtons);
 var _navBar = require("./NavBar");
 var _navBarDefault = parcelHelpers.interopDefault(_navBar);
 var _dataHandler = require("../utils/dataHandler");
@@ -18581,6 +18581,7 @@ var _settingsModal = require("./SettingsModal");
 var _settingsModalDefault = parcelHelpers.interopDefault(_settingsModal);
 var _confirmModal = require("./ConfirmModal");
 var _confirmModalDefault = parcelHelpers.interopDefault(_confirmModal);
+var _budgetsContext = require("../contexts/BudgetsContext");
 var _s = $RefreshSig$();
 const dataHandler = new (0, _dataHandlerDefault.default)();
 function App() {
@@ -18649,80 +18650,67 @@ function App() {
     };
     const selectBudget = (id)=>setSelectedBudget(id);
     const handleBgClick = (e)=>e.target.classList.contains("bgRef") && setSelectedBudget(0);
+    const budgetsContext = {
+        budgets,
+        addNewBudget,
+        updateBudget,
+        deleteBudget,
+        selectBudget,
+        selectedBudget
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         className: "bgRef justify-center border-black p-8 bg-slate-700 min-h-screen min-w-[320px]",
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             className: "relative max-w-5xl mx-auto",
-            children: [
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navBarDefault.default), {
-                    setSettingsModalVisible: setSettingsModalVisible
-                }, void 0, false, {
-                    fileName: "src/components/App.jsx",
-                    lineNumber: 84,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                    className: "flex flex-col gap-8 mt-28",
-                    children: [
-                        budgets.map((budget)=>{
-                            return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _budgetButtonDefault.default), {
-                                title: budget.title,
-                                remaining: budget.remaining,
-                                max: budget.max,
-                                id: budget.id,
-                                deleteBudget: deleteBudget,
-                                selectBudget: selectBudget,
-                                selectedBudget: selectedBudget,
-                                updateBudget: updateBudget,
-                                openConfirmModal: openConfirmModal
-                            }, budget.id, false, {
-                                fileName: "src/components/App.jsx",
-                                lineNumber: 88,
-                                columnNumber: 15
-                            }, this);
-                        }),
-                        /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                            onClick: ()=>addNewBudget(),
-                            className: "text-slate-300 font-extrabold text-[72px]",
-                            children: "+"
-                        }, void 0, false, {
-                            fileName: "src/components/App.jsx",
-                            lineNumber: 102,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "src/components/App.jsx",
-                    lineNumber: 85,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _settingsModalDefault.default), {
-                    settingsModalVisible: settingsModalVisible,
-                    setSettingsModalVisible: setSettingsModalVisible
-                }, void 0, false, {
-                    fileName: "src/components/App.jsx",
-                    lineNumber: 109,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _confirmModalDefault.default), {
-                    confirmModalVisible: confirmModalVisible,
-                    setConfirmModalVisible: setConfirmModalVisible,
-                    action: confirmProps.action,
-                    message: confirmProps.message
-                }, void 0, false, {
-                    fileName: "src/components/App.jsx",
-                    lineNumber: 113,
-                    columnNumber: 9
-                }, this)
-            ]
-        }, void 0, true, {
+            children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _budgetsContext.BudgetsContext).Provider, {
+                value: budgetsContext,
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _navBarDefault.default), {
+                        setSettingsModalVisible: setSettingsModalVisible
+                    }, void 0, false, {
+                        fileName: "src/components/App.jsx",
+                        lineNumber: 95,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _budgetButtonsDefault.default), {
+                        openConfirmModal: openConfirmModal
+                    }, void 0, false, {
+                        fileName: "src/components/App.jsx",
+                        lineNumber: 96,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _settingsModalDefault.default), {
+                        settingsModalVisible: settingsModalVisible,
+                        setSettingsModalVisible: setSettingsModalVisible
+                    }, void 0, false, {
+                        fileName: "src/components/App.jsx",
+                        lineNumber: 97,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _confirmModalDefault.default), {
+                        confirmModalVisible: confirmModalVisible,
+                        setConfirmModalVisible: setConfirmModalVisible,
+                        action: confirmProps.action,
+                        message: confirmProps.message
+                    }, void 0, false, {
+                        fileName: "src/components/App.jsx",
+                        lineNumber: 101,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/App.jsx",
+                lineNumber: 94,
+                columnNumber: 9
+            }, this)
+        }, void 0, false, {
             fileName: "src/components/App.jsx",
-            lineNumber: 83,
+            lineNumber: 93,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "src/components/App.jsx",
-        lineNumber: 82,
+        lineNumber: 92,
         columnNumber: 5
     }, this);
 }
@@ -18736,313 +18724,67 @@ $RefreshReg$(_c, "App");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./BudgetButton":"fjHCn","./NavBar":"eqUVf","../utils/dataHandler":"5HMjw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./SettingsModal":"1h2in","react-icons":"1Rz6v","./ConfirmModal":"3mMcJ"}],"fjHCn":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$16bd = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./NavBar":"eqUVf","../utils/dataHandler":"5HMjw","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","./SettingsModal":"1h2in","react-icons":"1Rz6v","./ConfirmModal":"3mMcJ","./BudgetButtons":"iky2P","../contexts/BudgetsContext":"dTaqT"}],"eqUVf":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$979d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$16bd.prelude(module);
+$parcel$ReactRefreshHelpers$979d.prelude(module);
 
 try {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>BudgetButton);
+parcelHelpers.export(exports, "default", ()=>NavBar);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _react = require("react");
 var _ti = require("react-icons/ti");
-var _s = $RefreshSig$();
-function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, selectedBudget, updateBudget, openConfirmModal }) {
-    _s();
-    const [input, setInput] = (0, _react.useState)(0);
-    const [progressBarValue, setProgressBarValue] = (0, _react.useState)(0);
-    const [titleValue, setTitleValue] = (0, _react.useState)(title);
-    const [renameVisible, setRenameVisible] = (0, _react.useState)(false);
-    const [titleSubmitVisible, setTitleSubmitVisible] = (0, _react.useState)(false);
-    (0, _react.useEffect)(()=>{
-        if (selectedBudget !== id) setRenameVisible(false);
-    }, [
-        selectedBudget,
-        id
-    ]);
-    (0, _react.useEffect)(()=>{
-        setProgressBarValue(Math.floor(remaining / max * 100));
-    }, [
-        remaining,
-        max
-    ]);
-    const onSubClick = ()=>input > 0 && input && updateBudget({
-            id,
-            newRemaining: remaining - input
-        });
-    const onAddClick = ()=>input && input > 0 && updateBudget({
-            id,
-            newRemaining: Math.min(remaining + input, max)
-        });
-    const onMaxClick = ()=>input && (remaining > input ? updateBudget({
-            id,
-            newMax: input,
-            newRemaining: input
-        }) : updateBudget({
-            id,
-            newMax: input
-        }));
-    const hideRenamingElsAfterTime = ()=>{
-        setTimeout(()=>{
-            setTitleSubmitVisible(false);
-            setRenameVisible(false);
-        }, 200);
-    };
-    const onTitleChangeClick = ()=>titleValue && updateBudget({
-            id,
-            newTitle: titleValue
-        });
-    const trackInput = (newValue)=>{
-        newValue.length <= 10 && setInput(Math.round(parseFloat(newValue) * 100) / 100);
-    };
-    const trackTitle = (newTitle)=>setTitleValue(newTitle);
-    const onBoxClick = ()=>selectBudget(id);
-    const onRenameClick = ()=>setRenameVisible(true);
-    const onDeleteClick = ()=>deleteBudget(id);
-    const colorHover = (color)=>`text-slate-800 hover:text-${color}-400 border-${color}-400 bg-${color}-400 hover:bg-slate-800`;
-    const adjustmentButtonsClass = "items-center justify-items-center w-[calc(height)] font-semibold text-6xl md:text-8xl rounded-full border-8 p-1 w-full";
+function NavBar({ setSettingsModalVisible }) {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "flex flex-col items-center",
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
-                className: "text-slate-200 font-medium italic self-start px-10 py-1 text-xl md:text-3xl mb-2 pl-10 bg-slate-600 rounded-lg",
-                children: title
-            }, void 0, false, {
-                fileName: "src/components/BudgetButton.jsx",
-                lineNumber: 77,
-                columnNumber: 7
-            }, this),
-            selectedBudget !== id ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                onClick: ()=>onBoxClick(),
-                className: " flex flex-col border-8 bg-slate-800 border-slate-300 rounded-md w-full p-4 hover:bg-slate-300 group shadow-2xl",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                        className: "text-[50px] md:text-[95px] text-slate-300 font-extrabold text-left pl-4 group-hover:text-slate-800",
-                        children: `${remaining >= 0 ? "$" + remaining : "-$" + Math.abs(remaining)}`
-                    }, void 0, false, {
-                        fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 85,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                        className: "text-[28px] md:text-[46px] text-slate-400 font-normal text-right pr-4 pb-2 group-hover:text-slate-800 self-end",
-                        children: ` / $${max}`
-                    }, void 0, false, {
-                        fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 88,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        style: {
-                            width: progressBarValue.toString() + "%",
-                            transition: "width 0.5s, background-color 0.5s"
-                        },
-                        className: `${progressBarValue > 35 ? "bg-green-400" : "bg-red-400"} h-10 mt-auto rounded-xl`
-                    }, void 0, false, {
-                        fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 91,
+        className: "fixed top-0 left-0 w-full p-4 backdrop-blur-xl backdrop-brightness-90",
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+            className: "bgRef flex items-center justify-between max-w-5xl mx-auto",
+            children: [
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
+                    className: "bgRef font-extrabold text-4xl md:text-6xl text-center text-slate-300 opacity-75",
+                    children: "NBS Budget"
+                }, void 0, false, {
+                    fileName: "src/components/NavBar.jsx",
+                    lineNumber: 7,
+                    columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                    onClick: ()=>setSettingsModalVisible(true),
+                    className: "font-extrabold justify-items-center text-3xl md:text-4xl opacity-50 hover:opacity-100 rounded-full border-8 h-20 w-20 bg-slate-800 hover:bg-slate-300 border-slate-800 text-slate-300 hover:text-slate-800 p-2",
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _ti.TiCogOutline), {}, void 0, false, {
+                        fileName: "src/components/NavBar.jsx",
+                        lineNumber: 14,
                         columnNumber: 11
                     }, this)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/BudgetButton.jsx",
-                lineNumber: 81,
-                columnNumber: 9
-            }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                className: "flex flex-col border-8 bg-slate-800 border-slate-300 rounded-lg w-full p-2 md:p-6",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "flex flex-col md:flex-row items-center justify-between mb-2",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "hidden md:flex flex-col self-start w-[25%]",
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                        className: "text-6xl text-slate-300 font-extrabold",
-                                        children: `$${remaining}`
-                                    }, void 0, false, {
-                                        fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 105,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                                        className: "text-3xl text-slate-300 font-normal",
-                                        children: ` / $${max}`
-                                    }, void 0, false, {
-                                        fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 108,
-                                        columnNumber: 15
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 104,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                type: "number",
-                                pattern: "/^\\d+(\\.\\d+)?$/",
-                                autoFocus: true,
-                                placeholder: "0",
-                                value: input || "",
-                                onFocus: ()=>setInput(0),
-                                onChange: (e)=>trackInput(e.target.value),
-                                className: "rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl w-full md:w-1/2 outline-none border-slate-300 border-4 text-slate-300 font-semibold px-4 mb-8"
-                            }, void 0, false, {
-                                fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 112,
-                                columnNumber: 13
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 103,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        className: "flex gap-2 h-auto justify-between",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                className: "grid grid-cols-2 w-[50%] gap-4",
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                        onClick: ()=>onAddClick(),
-                                        className: `${adjustmentButtonsClass + " " + colorHover("green")}`,
-                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _ti.TiPlusOutline), {}, void 0, false, {
-                                            fileName: "src/components/BudgetButton.jsx",
-                                            lineNumber: 131,
-                                            columnNumber: 17
-                                        }, this)
-                                    }, void 0, false, {
-                                        fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 125,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                        onClick: ()=>openConfirmModal(onMaxClick, `Set new max to: $${input}?`),
-                                        className: `${adjustmentButtonsClass + " " + colorHover("purple")} `,
-                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _ti.TiMediaEjectOutline), {}, void 0, false, {
-                                            fileName: "src/components/BudgetButton.jsx",
-                                            lineNumber: 141,
-                                            columnNumber: 17
-                                        }, this)
-                                    }, void 0, false, {
-                                        fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 133,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                        onClick: ()=>openConfirmModal(onDeleteClick, "Delete this budget?"),
-                                        className: `${adjustmentButtonsClass + " " + colorHover("red")} `,
-                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _ti.TiTrash), {}, void 0, false, {
-                                            fileName: "src/components/BudgetButton.jsx",
-                                            lineNumber: 151,
-                                            columnNumber: 17
-                                        }, this)
-                                    }, void 0, false, {
-                                        fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 143,
-                                        columnNumber: 15
-                                    }, this),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                        onClick: ()=>onRenameClick(),
-                                        onBlur: ()=>titleSubmitVisible && hideRenamingElsAfterTime(),
-                                        className: `${adjustmentButtonsClass + " " + colorHover("blue")} `,
-                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _ti.TiPencil), {}, void 0, false, {
-                                            fileName: "src/components/BudgetButton.jsx",
-                                            lineNumber: 160,
-                                            columnNumber: 17
-                                        }, this)
-                                    }, void 0, false, {
-                                        fileName: "src/components/BudgetButton.jsx",
-                                        lineNumber: 153,
-                                        columnNumber: 15
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 124,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                onClick: ()=>onSubClick(),
-                                className: `${adjustmentButtonsClass + " " + colorHover("red")} w-[50%]`,
-                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _ti.TiMinusOutline), {}, void 0, false, {
-                                    fileName: "src/components/BudgetButton.jsx",
-                                    lineNumber: 169,
-                                    columnNumber: 15
-                                }, this)
-                            }, void 0, false, {
-                                fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 163,
-                                columnNumber: 13
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 123,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                placeholder: "rename",
-                                maxLength: 20,
-                                onFocus: ()=>setTitleSubmitVisible(true),
-                                onBlur: ()=>hideRenamingElsAfterTime(),
-                                onChange: (e)=>trackTitle(e.target.value),
-                                className: `${renameVisible ? "mt-12" : "hidden"} flex mx-auto rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl w-full outline-none border-slate-300 border-4 text-slate-300 font-semibold px-4 mb-4`
-                            }, void 0, false, {
-                                fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 173,
-                                columnNumber: 13
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                onClick: ()=>onTitleChangeClick(),
-                                className: `${adjustmentButtonsClass + " " + colorHover("blue")} ${titleSubmitVisible ? "" : "hidden"} `,
-                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _ti.TiTickOutline), {}, void 0, false, {
-                                    fileName: "src/components/BudgetButton.jsx",
-                                    lineNumber: 189,
-                                    columnNumber: 15
-                                }, this)
-                            }, void 0, false, {
-                                fileName: "src/components/BudgetButton.jsx",
-                                lineNumber: 183,
-                                columnNumber: 13
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "src/components/BudgetButton.jsx",
-                        lineNumber: 172,
-                        columnNumber: 11
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "src/components/BudgetButton.jsx",
-                lineNumber: 102,
-                columnNumber: 9
-            }, this)
-        ]
-    }, void 0, true, {
-        fileName: "src/components/BudgetButton.jsx",
-        lineNumber: 76,
+                }, void 0, false, {
+                    fileName: "src/components/NavBar.jsx",
+                    lineNumber: 10,
+                    columnNumber: 9
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "src/components/NavBar.jsx",
+            lineNumber: 6,
+            columnNumber: 7
+        }, this)
+    }, void 0, false, {
+        fileName: "src/components/NavBar.jsx",
+        lineNumber: 5,
         columnNumber: 5
     }, this);
 }
-_s(BudgetButton, "ZuwhvSMx6mPcI5EV7a7kH836CoM=");
-_c = BudgetButton;
+_c = NavBar;
 var _c;
-$RefreshReg$(_c, "BudgetButton");
+$RefreshReg$(_c, "NavBar");
 
-  $parcel$ReactRefreshHelpers$16bd.postlude(module);
+  $parcel$ReactRefreshHelpers$979d.postlude(module);
 } finally {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-icons/ti":"dIwhC"}],"gkKU3":[function(require,module,exports,__globalThis) {
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-icons/ti":"dIwhC"}],"gkKU3":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -27033,77 +26775,9 @@ var DefaultContext = {
 };
 var IconContext = (0, _reactDefault.default).createContext && /*#__PURE__*/ (0, _reactDefault.default).createContext(DefaultContext);
 
-},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eqUVf":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$979d = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$979d.prelude(module);
-
-try {
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5HMjw":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "default", ()=>NavBar);
-var _jsxDevRuntime = require("react/jsx-dev-runtime");
-var _ti = require("react-icons/ti");
-function NavBar({ setSettingsModalVisible }) {
-    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "fixed top-0 left-0 w-full p-4 backdrop-blur-xl backdrop-brightness-90",
-        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-            className: "bgRef flex items-center justify-between max-w-5xl mx-auto",
-            children: [
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                    className: "bgRef font-extrabold text-4xl md:text-6xl text-center text-slate-300 opacity-75",
-                    children: "NBS Budget"
-                }, void 0, false, {
-                    fileName: "src/components/NavBar.jsx",
-                    lineNumber: 7,
-                    columnNumber: 9
-                }, this),
-                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                    onClick: ()=>setSettingsModalVisible(true),
-                    className: "font-extrabold justify-items-center text-3xl md:text-4xl opacity-50 hover:opacity-100 rounded-full border-8 h-20 w-20 bg-slate-800 hover:bg-slate-300 border-slate-800 text-slate-300 hover:text-slate-800 p-2",
-                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _ti.TiCogOutline), {}, void 0, false, {
-                        fileName: "src/components/NavBar.jsx",
-                        lineNumber: 14,
-                        columnNumber: 11
-                    }, this)
-                }, void 0, false, {
-                    fileName: "src/components/NavBar.jsx",
-                    lineNumber: 10,
-                    columnNumber: 9
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "src/components/NavBar.jsx",
-            lineNumber: 6,
-            columnNumber: 7
-        }, this)
-    }, void 0, false, {
-        fileName: "src/components/NavBar.jsx",
-        lineNumber: 5,
-        columnNumber: 5
-    }, this);
-}
-_c = NavBar;
-var _c;
-$RefreshReg$(_c, "NavBar");
-
-  $parcel$ReactRefreshHelpers$979d.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react-icons/ti":"dIwhC"}],"5HMjw":[function(require,module,exports,__globalThis) {
-var $parcel$ReactRefreshHelpers$c04c = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-$parcel$ReactRefreshHelpers$c04c.prelude(module);
-
-try {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _react = require("react");
-var _reactDefault = parcelHelpers.interopDefault(_react);
 class DataHandler {
     getStoredData = ()=>{
         const storedData = localStorage.getItem("data");
@@ -27144,12 +26818,7 @@ class DataHandler {
 }
 exports.default = DataHandler;
 
-  $parcel$ReactRefreshHelpers$c04c.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","react":"21dqq","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"1h2in":[function(require,module,exports,__globalThis) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1h2in":[function(require,module,exports,__globalThis) {
 var $parcel$ReactRefreshHelpers$0dee = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -27293,6 +26962,396 @@ $RefreshReg$(_c, "ConfirmModal");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq"}],"irmnC":[function() {},{}]},["aQL8O","9mu7C","8lqZg"], "8lqZg", "parcelRequire94c2")
+},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru","react":"21dqq"}],"iky2P":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$5742 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$5742.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>BudgetButtons);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _budgetButton = require("./BudgetButton");
+var _budgetButtonDefault = parcelHelpers.interopDefault(_budgetButton);
+var _react = require("react");
+var _budgetsContext = require("../contexts/BudgetsContext");
+var _s = $RefreshSig$();
+function BudgetButtons({ openConfirmModal }) {
+    _s();
+    const { budgets, deleteBudget, selectBudget, selectedBudget, updateBudget, addNewBudget } = (0, _react.useContext)((0, _budgetsContext.BudgetsContext));
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "flex flex-col gap-8 mt-28",
+        children: [
+            budgets.map((budget)=>{
+                return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _budgetButtonDefault.default), {
+                    title: budget.title,
+                    remaining: budget.remaining,
+                    max: budget.max,
+                    id: budget.id,
+                    deleteBudget: deleteBudget,
+                    selectBudget: selectBudget,
+                    selectedBudget: selectedBudget,
+                    updateBudget: updateBudget,
+                    openConfirmModal: openConfirmModal
+                }, budget.id, false, {
+                    fileName: "src/components/BudgetButtons.jsx",
+                    lineNumber: 19,
+                    columnNumber: 11
+                }, this);
+            }),
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                onClick: ()=>addNewBudget(),
+                className: "text-slate-300 font-extrabold text-[72px]",
+                children: "+"
+            }, void 0, false, {
+                fileName: "src/components/BudgetButtons.jsx",
+                lineNumber: 33,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/BudgetButtons.jsx",
+        lineNumber: 16,
+        columnNumber: 5
+    }, this);
+}
+_s(BudgetButtons, "HN2mVgn+pzvNuAvwgziTrvPof+I=");
+_c = BudgetButtons;
+var _c;
+$RefreshReg$(_c, "BudgetButtons");
+
+  $parcel$ReactRefreshHelpers$5742.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","./BudgetButton":"fjHCn","react":"21dqq","../contexts/BudgetsContext":"dTaqT","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"fjHCn":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$16bd = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$16bd.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", ()=>BudgetButton);
+var _jsxDevRuntime = require("react/jsx-dev-runtime");
+var _react = require("react");
+var _ti = require("react-icons/ti");
+var _s = $RefreshSig$();
+function BudgetButton({ title, remaining, max, id, deleteBudget, selectBudget, selectedBudget, updateBudget, openConfirmModal }) {
+    _s();
+    const [input, setInput] = (0, _react.useState)(0);
+    const [progressBarValue, setProgressBarValue] = (0, _react.useState)(0);
+    const [titleValue, setTitleValue] = (0, _react.useState)(title);
+    const [renameVisible, setRenameVisible] = (0, _react.useState)(false);
+    const [titleSubmitVisible, setTitleSubmitVisible] = (0, _react.useState)(false);
+    (0, _react.useEffect)(()=>{
+        if (selectedBudget !== id) setRenameVisible(false);
+    }, [
+        selectedBudget,
+        id
+    ]);
+    (0, _react.useEffect)(()=>{
+        setProgressBarValue(Math.floor(remaining / max * 100));
+    }, [
+        remaining,
+        max
+    ]);
+    const onSubClick = ()=>input > 0 && input && updateBudget({
+            id,
+            newRemaining: remaining - input
+        });
+    const onAddClick = ()=>input && input > 0 && updateBudget({
+            id,
+            newRemaining: Math.min(remaining + input, max)
+        });
+    const onMaxClick = ()=>input && (remaining > input ? updateBudget({
+            id,
+            newMax: input,
+            newRemaining: input
+        }) : updateBudget({
+            id,
+            newMax: input
+        }));
+    const hideRenamingElsAfterTime = ()=>{
+        setTimeout(()=>{
+            setTitleSubmitVisible(false);
+            setRenameVisible(false);
+        }, 200);
+    };
+    const onTitleChangeClick = ()=>titleValue && updateBudget({
+            id,
+            newTitle: titleValue
+        });
+    const trackInput = (newValue)=>{
+        newValue.length <= 10 && setInput(Math.round(parseFloat(newValue) * 100) / 100);
+    };
+    const trackTitle = (newTitle)=>setTitleValue(newTitle);
+    const onBoxClick = ()=>selectBudget(id);
+    const onRenameClick = ()=>setRenameVisible(true);
+    const onDeleteClick = ()=>deleteBudget(id);
+    const colorHover = (color)=>`text-slate-800 hover:text-${color}-400 border-${color}-400 bg-${color}-400 hover:bg-slate-800`;
+    const adjustmentButtonsClass = "items-center justify-items-center w-[calc(height)] font-semibold text-6xl md:text-8xl rounded-full border-8 p-1 w-full";
+    return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+        className: "flex flex-col items-center",
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
+                className: "text-slate-200 font-medium italic self-start px-10 py-1 text-xl md:text-3xl mb-2 pl-10 bg-slate-600 rounded-lg",
+                children: title
+            }, void 0, false, {
+                fileName: "src/components/BudgetButton.jsx",
+                lineNumber: 77,
+                columnNumber: 7
+            }, this),
+            selectedBudget !== id ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                onClick: ()=>onBoxClick(),
+                className: " flex flex-col border-8 bg-slate-800 border-slate-300 rounded-md w-full p-4 hover:bg-slate-300 group shadow-2xl",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                        className: "text-[50px] md:text-[95px] text-slate-300 font-extrabold text-left pl-4 group-hover:text-slate-800",
+                        children: `${remaining >= 0 ? "$" + remaining : "-$" + Math.abs(remaining)}`
+                    }, void 0, false, {
+                        fileName: "src/components/BudgetButton.jsx",
+                        lineNumber: 85,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                        className: "text-[28px] md:text-[46px] text-slate-400 font-normal text-right pr-4 pb-2 group-hover:text-slate-800 self-end",
+                        children: ` / $${max}`
+                    }, void 0, false, {
+                        fileName: "src/components/BudgetButton.jsx",
+                        lineNumber: 88,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        style: {
+                            width: progressBarValue.toString() + "%",
+                            transition: "width 0.5s, background-color 0.5s"
+                        },
+                        className: `${progressBarValue > 35 ? "bg-green-400" : "bg-red-400"} h-10 mt-auto rounded-xl`
+                    }, void 0, false, {
+                        fileName: "src/components/BudgetButton.jsx",
+                        lineNumber: 91,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/BudgetButton.jsx",
+                lineNumber: 81,
+                columnNumber: 9
+            }, this) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                className: "flex flex-col border-8 bg-slate-800 border-slate-300 rounded-lg w-full p-2 md:p-6",
+                children: [
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex flex-col md:flex-row items-center justify-between mb-2",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "hidden md:flex flex-col self-start w-[25%]",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                        className: "text-6xl text-slate-300 font-extrabold",
+                                        children: `$${remaining}`
+                                    }, void 0, false, {
+                                        fileName: "src/components/BudgetButton.jsx",
+                                        lineNumber: 105,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
+                                        className: "text-3xl text-slate-300 font-normal",
+                                        children: ` / $${max}`
+                                    }, void 0, false, {
+                                        fileName: "src/components/BudgetButton.jsx",
+                                        lineNumber: 108,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/BudgetButton.jsx",
+                                lineNumber: 104,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                type: "number",
+                                pattern: "/^\\d+(\\.\\d+)?$/",
+                                autoFocus: true,
+                                placeholder: "0",
+                                value: input || "",
+                                onFocus: ()=>setInput(0),
+                                onChange: (e)=>trackInput(e.target.value),
+                                className: "rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl w-full md:w-1/2 outline-none border-slate-300 border-4 text-slate-300 font-semibold px-4 mb-8"
+                            }, void 0, false, {
+                                fileName: "src/components/BudgetButton.jsx",
+                                lineNumber: 112,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/BudgetButton.jsx",
+                        lineNumber: 103,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        className: "flex gap-2 h-auto justify-between",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                                className: "grid grid-cols-2 w-[50%] gap-4",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                        onClick: ()=>onAddClick(),
+                                        className: `${adjustmentButtonsClass + " " + colorHover("green")}`,
+                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _ti.TiPlusOutline), {}, void 0, false, {
+                                            fileName: "src/components/BudgetButton.jsx",
+                                            lineNumber: 131,
+                                            columnNumber: 17
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "src/components/BudgetButton.jsx",
+                                        lineNumber: 125,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                        onClick: ()=>openConfirmModal(onMaxClick, `Set new max to: $${input}?`),
+                                        className: `${adjustmentButtonsClass + " " + colorHover("purple")} `,
+                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _ti.TiMediaEjectOutline), {}, void 0, false, {
+                                            fileName: "src/components/BudgetButton.jsx",
+                                            lineNumber: 141,
+                                            columnNumber: 17
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "src/components/BudgetButton.jsx",
+                                        lineNumber: 133,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                        onClick: ()=>openConfirmModal(onDeleteClick, "Delete this budget?"),
+                                        className: `${adjustmentButtonsClass + " " + colorHover("red")} `,
+                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _ti.TiTrash), {}, void 0, false, {
+                                            fileName: "src/components/BudgetButton.jsx",
+                                            lineNumber: 151,
+                                            columnNumber: 17
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "src/components/BudgetButton.jsx",
+                                        lineNumber: 143,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                        onClick: ()=>onRenameClick(),
+                                        onBlur: ()=>titleSubmitVisible && hideRenamingElsAfterTime(),
+                                        className: `${adjustmentButtonsClass + " " + colorHover("blue")} `,
+                                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _ti.TiPencil), {}, void 0, false, {
+                                            fileName: "src/components/BudgetButton.jsx",
+                                            lineNumber: 160,
+                                            columnNumber: 17
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "src/components/BudgetButton.jsx",
+                                        lineNumber: 153,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "src/components/BudgetButton.jsx",
+                                lineNumber: 124,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                onClick: ()=>onSubClick(),
+                                className: `${adjustmentButtonsClass + " " + colorHover("red")} w-[50%]`,
+                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _ti.TiMinusOutline), {}, void 0, false, {
+                                    fileName: "src/components/BudgetButton.jsx",
+                                    lineNumber: 169,
+                                    columnNumber: 15
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "src/components/BudgetButton.jsx",
+                                lineNumber: 163,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/BudgetButton.jsx",
+                        lineNumber: 123,
+                        columnNumber: 11
+                    }, this),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                        children: [
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
+                                placeholder: "rename",
+                                maxLength: 20,
+                                onFocus: ()=>setTitleSubmitVisible(true),
+                                onBlur: ()=>hideRenamingElsAfterTime(),
+                                onChange: (e)=>trackTitle(e.target.value),
+                                className: `${renameVisible ? "mt-12" : "hidden"} flex mx-auto rounded-xl bg-slate-900 min-h-32 text-4xl sm:text-6xl w-full outline-none border-slate-300 border-4 text-slate-300 font-semibold px-4 mb-4`
+                            }, void 0, false, {
+                                fileName: "src/components/BudgetButton.jsx",
+                                lineNumber: 173,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                                onClick: ()=>onTitleChangeClick(),
+                                className: `${adjustmentButtonsClass + " " + colorHover("blue")} ${titleSubmitVisible ? "" : "hidden"} `,
+                                children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _ti.TiTickOutline), {}, void 0, false, {
+                                    fileName: "src/components/BudgetButton.jsx",
+                                    lineNumber: 189,
+                                    columnNumber: 15
+                                }, this)
+                            }, void 0, false, {
+                                fileName: "src/components/BudgetButton.jsx",
+                                lineNumber: 183,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "src/components/BudgetButton.jsx",
+                        lineNumber: 172,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "src/components/BudgetButton.jsx",
+                lineNumber: 102,
+                columnNumber: 9
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "src/components/BudgetButton.jsx",
+        lineNumber: 76,
+        columnNumber: 5
+    }, this);
+}
+_s(BudgetButton, "ZuwhvSMx6mPcI5EV7a7kH836CoM=");
+_c = BudgetButton;
+var _c;
+$RefreshReg$(_c, "BudgetButton");
+
+  $parcel$ReactRefreshHelpers$16bd.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","react-icons/ti":"dIwhC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"dTaqT":[function(require,module,exports,__globalThis) {
+var $parcel$ReactRefreshHelpers$21f9 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+$parcel$ReactRefreshHelpers$21f9.prelude(module);
+
+try {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "BudgetsContext", ()=>BudgetsContext);
+var _react = require("react");
+var _reactDefault = parcelHelpers.interopDefault(_react);
+const BudgetsContext = /*#__PURE__*/ (0, _reactDefault.default).createContext();
+
+  $parcel$ReactRefreshHelpers$21f9.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+},{"react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"km3Ru"}],"irmnC":[function() {},{}]},["aQL8O","9mu7C","8lqZg"], "8lqZg", "parcelRequire94c2")
 
 //# sourceMappingURL=index.975ef6c8.js.map

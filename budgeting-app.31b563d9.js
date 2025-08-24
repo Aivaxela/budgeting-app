@@ -24984,8 +24984,8 @@ function App() {
         const newId = budgets.map((item)=>item.id).reduce((acc, curr)=>Math.max(acc, curr)) + 1;
         const newBudget = {
             title: "New Budget",
-            remaining: 100,
-            max: 100,
+            remaining: 150,
+            max: 150,
             id: newId
         };
         setBudgets([
@@ -43266,7 +43266,6 @@ _c = CustomMarker;
 function GoogleMap() {
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactGoogleMaps.APIProvider), {
         apiKey: "AIzaSyCv2CjpzUlvxTvHgFaRSlkrYxP4RoBG9x0",
-        onLoad: ()=>console.log("Maps API has loaded."),
         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             className: "w-full h-72 rounded-lg border-8 overflow-hidden",
             children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactGoogleMaps.Map), {
@@ -43278,17 +43277,17 @@ function GoogleMap() {
                 mapId: "2524d89f865da406c88920cb",
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)(CustomMarker, {}, void 0, false, {
                     fileName: "src/components/GoogleMap.jsx",
-                    lineNumber: 31,
+                    lineNumber: 28,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "src/components/GoogleMap.jsx",
-                lineNumber: 26,
+                lineNumber: 23,
                 columnNumber: 9
             }, this)
         }, void 0, false, {
             fileName: "src/components/GoogleMap.jsx",
-            lineNumber: 25,
+            lineNumber: 22,
             columnNumber: 7
         }, this)
     }, void 0, false, {
